@@ -1,0 +1,18 @@
+image: node:14.17.6
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies
+        caches:
+          - node
+        script:
+          - npm install
+        artifacts:
+          - node_modules/**
+    - step:
+        name: Run tests
+        caches:
+          - node
+        script:
+          - npm run test
