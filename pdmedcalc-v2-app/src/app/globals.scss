@@ -1,3 +1,7 @@
+@use "styles/breakpoints";
+@use "styles/colours";
+@use "styles/typography";
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -12,4 +16,24 @@ body {
 
 html {
   font-size: 16px;
+}
+
+body {
+  background-color: colours.$grey-2;
+}
+
+main {
+  max-width: 21.375rem;
+  margin: 0 auto 2.5rem auto;
+
+  @media (min-width: breakpoints.$large) {
+    max-width: 60rem;
+  }
+}
+
+/*to prevent fixed header overlapping main content*/
+main::before {
+  content: '';
+  display: inline-block;
+  height: 58px;
 }
