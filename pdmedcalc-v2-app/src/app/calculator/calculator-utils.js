@@ -1,20 +1,20 @@
 import { medications } from "../data/data";
 
-function hasDopamineAgonist(arrayOfMedicines) {
-    return arrayOfMedicines.filter((aMedicineObj) => medications[aMedicineObj.name].isDa).length > 0;
+export function hasDopamineAgonist(arrayOfMedicines) {
+    return arrayOfMedicines.some((aMedicineObj) => medications[aMedicineObj.name].isDa);
 }
 
-function onlyHasDopamineAgonists(arrayOfMedicines) {
+export function onlyHasDopamineAgonists(arrayOfMedicines) {
     return arrayOfMedicines.every((aMedicineObj) => medications[aMedicineObj.name].isDa);
 }
 
-function calculateTotalLed(arrayOfMedicines) {
+export function calculateTotalLed(arrayOfMedicines) {
     return arrayOfMedicines.reduce((totalLED, currentMedicineObj) => {
         return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led);
     }, 0)
 }
 
-function calculateMadopar(targetLED) {
+export function calculateMadopar(targetLED) {
 
     const divBy100Remainder = targetLED % 100;
     const smallerMadoparNeeded = divBy100Remainder !== 0 && divBy100Remainder <= 50;
@@ -28,7 +28,7 @@ function calculateMadopar(targetLED) {
     }
 }
 
-function splitMadopar(madoparObj) {
+export function splitMadopar(madoparObj) {
 
     let bigMadoparQuantities = [0, 0, 0, 0];
 
@@ -96,7 +96,7 @@ function splitMadopar(madoparObj) {
 
 }
 
-function calculateRotigotine(arrayOfMedicines) {
+export function calculateRotigotine(arrayOfMedicines) {
     const correctionFactor = onlyHasDopamineAgonists(arrayOfMedicines) ? 0.5 : 0.25;
     const targetLED = calculateTotalLed(arrayOfMedicines);
     const maxPatchdose = 16;
@@ -148,7 +148,7 @@ function threeOptions(arrayOfMedicines) {
     }
 }
 
-function mainTransform(arrayOfMedicines) {
+export function mainTransform(arrayOfMedicines) {
     const hasDopamineAgonistsAndNonDopamineAgonists = hasDopamineAgonist(arrayOfMedicines) && !onlyHasDopamineAgonists(arrayOfMedicines);
 
     if (hasDopamineAgonistsAndNonDopamineAgonists) { return threeOptions(arrayOfMedicines); }
