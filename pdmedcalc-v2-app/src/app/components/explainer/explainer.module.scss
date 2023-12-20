@@ -1,0 +1,21 @@
+@use "../../styles/breakpoints";
+
+.heading {
+    margin-top: 2.5rem;
+
+    @media (min-width: breakpoints.$large) {
+        margin-top: 3.75rem;
+    }
+}
+
+.subheading {
+    margin-top: 1rem;
+}
+
+.sentence {
+    margin-top: 0.5rem;
+}
+
+.bullets {
+    padding-left: 1rem;
+}
