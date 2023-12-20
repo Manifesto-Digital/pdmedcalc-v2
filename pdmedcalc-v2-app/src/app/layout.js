@@ -1,6 +1,7 @@
 import './globals.scss'
 
 import GlobalHeader from './components/global-header/GlobalHeader'
+import GlobalFooter from './components/global-footer/GlobalFooter'
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <GlobalHeader />
         {children}
+        <GlobalFooter />
       </body>
     </html>
   )

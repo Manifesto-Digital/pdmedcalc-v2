@@ -23,7 +23,7 @@ body {
 }
 
 main {
-  max-width: 21.375rem;
+  max-width: 91.5vw;
   margin: 0 auto 2.5rem auto;
 
   @media (min-width: breakpoints.$large) {
@@ -34,6 +34,6 @@ main {
 /*to prevent fixed header overlapping main content*/
 main::before {
   content: '';
-  display: inline-block;
+  display: block;
   height: 58px;
 }
