@@ -87,6 +87,7 @@ h6,
 }
 
 p,
+.p,
 a {
     font-family: fonts.$default-font;
     font-weight: 400;
@@ -99,7 +100,8 @@ a {
     }
 }
 
-p {
+p,
+.p {
     color: colours.$black-1;
 }
 

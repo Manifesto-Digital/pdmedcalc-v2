@@ -28,6 +28,7 @@
 
 .contentContainer {
     padding: 1rem;
+    border: 1px solid colours.$grey-1;
 
     @media (min-width: breakpoints.$large) {
         padding: 2rem;
