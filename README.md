@@ -1,29 +1,27 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Introduction ##
 
-### What is this repository for? ###
+This Repo is for the medcalc tool, a web application that helps healthcare providers (primarily doctors and nurses) quickly and easily convert a Parkinson’s patient’s regular medicine into an equivalent dose of another medicine. 
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+The need for this tool is based on the fact that sometimes patients with Parkinson's Disease (PD) who have been admitted to hospital are unable to take their medications orally. Therefore the patient's usual oral medications need to be converted to a 'Levodopa equivalent dose' (LED), which is delivered either through a patch or via a naso-gastric tube.
 
-### How do I get set up? ###
+## Version ##
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+This project is be based upon an [old, existing version of the Medcalc](https://bitbucket.org/tpximpactdx/pdmedcalc-old/src/main/) tool that was built by another another developer.
 
-### Contribution guidelines ###
+This is therefore v2 of the medcalc tool.
 
-* Writing tests
-* Code review
-* Other guidelines
+## Set up ##
 
-### Who do I talk to? ###
+1. Clone the repo to your machine
+2. cd into the directory where you cloned it
+3. cd into pdmedcalc-v2-app
 
-* Repo owner or admin
-* Other community or team contact
+### How to start the dev server ###
+
+From inside pdmedcalc-v2-app, run ```npm run dev``` to start the development server and visit [http://localhost:3000](http://localhost:3000) to see the home page
+
+### How to run the tests ###
+
+From inside pdmedcalc-v2-app, run ```npm run test```
