@@ -4,136 +4,122 @@ import { useState } from 'react'
 import { medications } from '@/app/data/data'
 import styles from './medicines-form.module.scss'
 
-export default function MobileVersion() {
+export function MobileVersion() {
 
 
-    function OneMedInput({ setNumOfMedInputs }) {
+    function OneMedInput({ thisMedInput, allMedInputs, setMedInputs }) {
+
         const medicines = Object.keys(medications);
-        const frequencies = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const frequencies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         const add = (e) => {
             e.preventDefault();
 
-
             const overallWrappingDiv = e.target.parentElement.parentElement;
-            console.log(overallWrappingDiv)
             const selectedMedicine = overallWrappingDiv.querySelector('[name="medicine"]');
             const medicineErrorMessage = overallWrappingDiv.querySelector('[data-error="medicine"]');
             const selectedFrequency = overallWrappingDiv.querySelector('[name="frequency"]');
             const frequencyErrorMessage = overallWrappingDiv.querySelector('[data-error="frequency"]');
-            const clearButton = e.target.nextElementSibling;
-            const removeButton = e.target.nextElementSibling.nextElementSibling;
-            console.log(removeButton)
 
             //to prevent unfilled values; should only proceed if both medicine and frequency are filled out
             if (!selectedMedicine.value) {
-                medicineErrorMessage.classList.remove(styles.hide);
+                medicineErrorMessage.classList.remove('hide');
                 selectedMedicine.classList.add(styles.errorBox);
             }
             if (!selectedFrequency.value) {
-                frequencyErrorMessage.classList.remove(styles.hide);
+                frequencyErrorMessage.classList.remove('hide');
                 selectedFrequency.classList.add(styles.errorBox);
+                selectedMedicine.setAttribute("readonly", "");
             }
 
             if (selectedMedicine.value && selectedFrequency.value) {
                 //add another <OneMedInput />
-                setNumOfMedInputs((previousNumOfMedInputs) => [...previousNumOfMedInputs, 1]);
-
-                //hide the current <OneMedInput />'s add button
-                e.target.classList.add(styles.hide);
-
-                //replace the current <OneMedInput />'s two selects with input elements instead
-                const newInputElement = document.createElement('input');
-                newInputElement.type = 'text';
-                newInputElement.name = 'medicine';
-                newInputElement.value = selectedMedicine.value;
-                newInputElement.readOnly = true;
-                selectedMedicine.replaceWith(newInputElement);
-
-                const newInputElement2 = document.createElement('input');
-                newInputElement2.type = 'text';
-                newInputElement2.name = 'frequency';
-                newInputElement2.value = selectedFrequency.value;
-                newInputElement2.readOnly = true;
-                selectedFrequency.replaceWith(newInputElement2);
-
-                //replace the clear button with a remove button
-                // const removeButton = document.createElement('button');
-                // removeButton.type = 'click';
-                // removeButton.className = styles.remove;
-                // removeButton.innerText = 'Remove'
-                // removeButton.onclick = () => overallWrappingDiv.remove();
-                // clearButton.replaceWith(removeButton);
-                console.log("new")
-
-                clearButton.classList.add(styles.hide);
-                removeButton.classList.remove(styles.hide);
+                const newMedInputs = [...allMedInputs];
+                const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
+                newMedInputs[index].added = true;
+                newMedInputs.push({ id: thisMedInput.id + 1, values: { medicine: '', frequency: '', added: false } })
+                setMedInputs(newMedInputs);
             }
 
         }
 
-        const removeErrorMessageIfAppropriate = (e) => {
+        const handleMedChange = (e) => {
             if (e.target.value != '') {
                 e.target.classList.remove(styles.errorBox);
-                e.target.previousElementSibling.classList.add(styles.hide);
+                e.target.previousElementSibling.classList.add('hide');
             }
+            const newMedInputs = [...allMedInputs];
+            const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
+            newMedInputs[index].values.medicine = e.target.value;
+            setMedInputs(newMedInputs);
+        };
+
+        const handleFreqChange = (e) => {
+            if (e.target.value != '') {
+                e.target.classList.remove(styles.errorBox);
+                e.target.previousElementSibling.classList.add('hide');
+            }
+            const newMedInputs = [...allMedInputs];
+            const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
+            newMedInputs[index].values.frequency = e.target.value;
+            setMedInputs(newMedInputs);
         };
 
         const reset = (e) => {
             e.preventDefault();
 
-            const overallWrappingDiv = e.target.parentElement.parentElement;
-            const selectedMedicine = overallWrappingDiv.querySelector('[name="medicine"]');
-            const selectedFrequency = overallWrappingDiv.querySelector('[name="frequency"]');
-
-            selectedMedicine.value = '';
-            selectedFrequency.value = '';
+            const newMedInputs = [...allMedInputs];
+            const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
+            newMedInputs[index].values = { medicine: '', frequency: '', added: false };
+            setMedInputs(newMedInputs);
         };
 
-        const removeEntireSelection = (e) => {
+        const removeMedInput = (e) => {
             e.preventDefault();
 
-            const overallWrappingDiv = e.target.parentElement.parentElement;
-            overallWrappingDiv.remove();
+            const copy = [...allMedInputs];
+            const index = copy.findIndex((medInput) => medInput.id === thisMedInput.id);
+            const allPreviousMedInputs = copy.slice(0, index);
+            const allSubsequentMedInputs = copy.slice(index + 1);
+            const newMedInputs = [...allPreviousMedInputs, ...allSubsequentMedInputs];
+            setMedInputs(newMedInputs);
         }
-
-        const test23 = () => { console.log("do nothing") }
 
         return (
             <div className={styles.selectsAndButtonsContainer}>
                 <label className={styles.label}>
                     <p className='h5'>Dose</p>
-                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + styles.hide} data-error="medicine">Select dose</p>
-                    <select name="medicine" className={styles.select} onChange={test23}>
+                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="medicine">Select dose</p>
+                    <select name="medicine" className={(thisMedInput.values.medicine ? styles.none : '') + ' ' + styles.select} onChange={handleMedChange}>
                         <option value="">Select</option>
+                        {thisMedInput.values.medicine && <option selected value={thisMedInput.values.medicine}>{thisMedInput.values.medicine}</option>}
                         {medicines.map((med, index) => <option key={index} value={med}>{med}</option>)}
                     </select>
                 </label>
                 <label className={styles.label}>
                     <p className='h5'>Frequency</p>
-                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + styles.hide} data-error="frequency">Select frequency</p>
-                    <select name="frequency" className={styles.select} onChange={test23}>
+                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="frequency">Select frequency</p>
+                    <select name="frequency" className={(thisMedInput.values.frequency ? styles.none : '') + ' ' + styles.select} onChange={handleFreqChange}>
                         <option value="">Select</option>
-                        {frequencies.map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
+                        {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
+                        {frequencies.filter(freq => freq !== thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
                     </select>
                 </label>
                 <p className='h5'>Add/Remove</p>
                 <div className={styles.addAndRemoveButtonsContainer}>
-                    <button type='click' onClick={add} className={styles.add + ' ' + 'p'}>Add</button>
-                    <button type='click' onClick={reset} className={styles.clear + ' ' + 'p'}>Clear</button>
-                    <button type='click' onClick={removeEntireSelection} className={styles.remove + ' ' + 'p' + ' ' + styles.hide + ' abc'}>Remove</button>
+                    <button type='click' onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')}>Add</button>
+                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')}>Clear</button>
+                    <button type='click' onClick={removeMedInput} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')}>Remove</button>
                 </div>
             </div>
         )
     }
 
+    const [medInputs, setMedInputs] = useState([{ id: 1, values: { medicine: '', frequency: '' }, added: false }]);
 
-
-    //note: the values in the numOfMedInputs array array don't matter. only the length of the array matters
-    const [numOfMedInputs, setNumOfMedInputs] = useState([1]);
 
     return (
         <form action='/results' className={styles.mobileOnly}>
-            {numOfMedInputs.map((num, index) => <OneMedInput key={index} setNumOfMedInputs={setNumOfMedInputs} />)}
+            {medInputs.map((aMedInput) => <OneMedInput key={aMedInput.id} thisMedInput={aMedInput} allMedInputs={medInputs} setMedInputs={setMedInputs} />)}
             <button type='submit' className={styles.button}>Calculate</button>
         </form>
     )
