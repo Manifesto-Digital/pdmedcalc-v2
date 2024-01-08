@@ -1,0 +1,14 @@
+@use "../styles/breakpoints";
+
+.heading,
+.subheading {
+    margin-top: 1rem;
+}
+
+.mobileOnly {
+    display: block;
+
+    @media (min-width: breakpoints.$large) {
+        display: none;
+    }
+}

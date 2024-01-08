@@ -1,5 +1,6 @@
 @use "styles/breakpoints";
 @use "styles/colours";
+@use "styles/links";
 @use "styles/typography";
 
 * {
@@ -36,4 +37,8 @@ main::before {
   content: '';
   display: block;
   height: 58px;
+}
+
+.hide {
+  display: none;
 }

@@ -1,0 +1,19 @@
+@use "../../styles/colours";
+
+.container {
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: 1.5rem;
+
+    &:hover {
+        path {
+            fill: colours.$black-2;
+        }
+    }
+
+    &:focus {
+        path {
+            fill: colours.$black-1;
+        }
+    }
+}
