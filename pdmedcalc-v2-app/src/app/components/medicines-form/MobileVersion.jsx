@@ -28,7 +28,6 @@ export function MobileVersion() {
             if (!selectedFrequency.value) {
                 frequencyErrorMessage.classList.remove('hide');
                 selectedFrequency.classList.add(styles.errorBox);
-                selectedMedicine.setAttribute("readonly", "");
             }
 
             if (selectedMedicine.value && selectedFrequency.value) {
@@ -89,19 +88,19 @@ export function MobileVersion() {
                 <label className={styles.label}>
                     <p className='h5'>Dose</p>
                     <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="medicine">Select dose</p>
-                    <select name="medicine" className={(thisMedInput.values.medicine ? styles.none : '') + ' ' + styles.select} onChange={handleMedChange}>
+                    <select name="medicine" className={(thisMedInput.values.medicine ? styles.none : '') + ' p ' + styles.select} onChange={handleMedChange}>
                         <option value="">Select</option>
                         {thisMedInput.values.medicine && <option selected value={thisMedInput.values.medicine}>{thisMedInput.values.medicine}</option>}
-                        {medicines.map((med, index) => <option key={index} value={med}>{med}</option>)}
+                        {medicines.filter(med => med !== thisMedInput.values.medicine).map((med, index) => <option key={index} value={med}>{med}</option>)}
                     </select>
                 </label>
                 <label className={styles.label}>
                     <p className='h5'>Frequency</p>
                     <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="frequency">Select frequency</p>
-                    <select name="frequency" className={(thisMedInput.values.frequency ? styles.none : '') + ' ' + styles.select} onChange={handleFreqChange}>
+                    <select name="frequency" className={(thisMedInput.values.frequency ? styles.none : '') + ' p ' + styles.select} onChange={handleFreqChange}>
                         <option value="">Select</option>
                         {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
-                        {frequencies.filter(freq => freq !== thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
+                        {frequencies.filter(freq => freq != thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
                     </select>
                 </label>
                 <p className='h5'>Add/Remove</p>

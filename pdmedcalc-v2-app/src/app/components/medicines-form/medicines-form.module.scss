@@ -22,6 +22,14 @@
     padding: 1rem;
     border: 1px solid colours.$grey-1;
     background-color: colours.$white;
+
+    @media (min-width: breakpoints.$large) {
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: grid;
+        grid-template-columns: 33.75rem 13.125rem 13.125rem;
+    }
 }
 
 .label {
@@ -33,6 +41,10 @@
 
 .errorMessage {
     color: colours.$red-1;
+
+    @media (min-width: breakpoints.$large) {
+        padding: 1rem 0 0 1rem;
+    }
 }
 
 .errorBox {
@@ -41,10 +53,31 @@
 
 .select {
 
+    border: 2px solid colours.$grey-4;
+
+    @media (min-width: breakpoints.$large) {
+        border: none;
+        padding: 1rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('../../../../public/chevron-down.svg') top 50% right 8px/24px 24px no-repeat;
+        display: block;
+        width: 100%;
+
+        &.errorBox {
+            border: 2px solid colours.$grey-4;
+            margin-top: 0.5rem;
+        }
+    }
+
     &:focus,
     &:focus-visible {
         outline: none;
         box-shadow: 0 0 0 2px colours.$yellow-1;
+
+        @media (min-width: breakpoints.$large) {
+            border: 2px solid colours.$grey-4;
+        }
     }
 }
 
@@ -53,6 +86,13 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+
+    @media (min-width: breakpoints.$large) {
+        margin-top: 0;
+        padding: 1rem;
+        background-color: colours.$white;
+        border: 1px solid colours.$grey-1;
+    }
 }
 
 .add,
@@ -139,4 +179,34 @@
         color: colours.$black-1;
         outline: none;
     }
+}
+
+.formContainer {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 33.75rem 13.125rem 13.125rem;
+}
+
+.columnHeading {
+    background-color: colours.$blue-1;
+    color: colours.$white;
+    padding: 1rem;
+    border: 1px solid colours.$grey-1;
+}
+
+.medInputContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.selected {
+    background: colours.$white;
+}
+
+.selectAndErrorContainer {
+    background-color: colours.$white;
+    border: 1px solid colours.$grey-1;
+    display: flex;
+    flex-direction: column;
 }
