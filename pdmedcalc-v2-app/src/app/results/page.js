@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
 import BackToTop from '../components/back-to-top/BackToTop';
 import EnteredMedicines from '../components/entered-medicines/EnteredMedicines'
@@ -81,8 +82,8 @@ export default function Results(req) {
                     from the PD team.
                 </li>
             </ul>
+            <ReferencesAccordion />
             <BackToTop />
-
         </main>
     )
 }
