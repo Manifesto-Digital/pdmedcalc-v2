@@ -1,1 +1,7 @@
 @use "../styles/breakpoints";
+
+.homePageContainer {
+    @media (min-width: breakpoints.$large) {
+        max-width: 39.5rem;
+    }
+}

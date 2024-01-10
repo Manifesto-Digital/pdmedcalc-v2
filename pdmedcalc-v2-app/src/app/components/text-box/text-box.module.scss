@@ -5,6 +5,10 @@
     background-color: colours.$white;
     margin-top: 1rem;
 
+    @media (min-width: breakpoints.$large) {
+        max-width: 39.5rem;
+    }
+
     &Caution {
         margin-top: 1.5rem;
     }

@@ -4,6 +4,7 @@ import EnteredMedicines from '../components/entered-medicines/EnteredMedicines'
 import Option1 from '../components/options/Option1'
 import Option2 from '../components/options/Option2'
 import Option3 from '../components/options/Option3'
+import TextBox from '../components/text-box/TextBox';
 import styles from './results-page.module.scss'
 import { calculateTotalLed, mainTransform } from '../calculator/calculator-utils'
 
@@ -55,6 +56,7 @@ export default function Results(req) {
                 </p>
                 <Option3 option3={calculationResult.option3} />
             </div>)}
+            <TextBox isCaution />
 
         </main>
     )
