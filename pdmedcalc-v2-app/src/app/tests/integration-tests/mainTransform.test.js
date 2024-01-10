@@ -110,15 +110,15 @@ describe('tests for the main transform function', () => {
             ],
         };
 
-        const expectedOptionTwoObject = {
+        const expectedOptionThreeObject = {
             madoparDose: expectedMadoparForJustNonDopamineAgonists,
             rotigotineDose: 4
         };
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: expectedOptionTwoObject,
-            option3: 4
+            option2: 4,
+            option3: expectedOptionThreeObject,
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);

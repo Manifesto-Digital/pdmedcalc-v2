@@ -1,0 +1,11 @@
+@use "../styles/breakpoints";
+@use "../styles/colours";
+
+.heading,
+.text {
+    margin-top: 1rem;
+}
+
+.textFaded {
+    color: colours.$grey-3;
+}

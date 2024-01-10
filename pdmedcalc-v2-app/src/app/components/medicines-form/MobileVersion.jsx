@@ -5,8 +5,6 @@ import { medications } from '@/app/data/data'
 import styles from './medicines-form.module.scss'
 
 export function MobileVersion() {
-
-
     function OneMedInput({ thisMedInput, allMedInputs, setMedInputs }) {
 
         const medicines = Object.keys(medications);
