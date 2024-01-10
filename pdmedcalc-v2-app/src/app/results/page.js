@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import Back from "../components/back/Back"
+import BackToTop from '../components/back-to-top/BackToTop';
 import EnteredMedicines from '../components/entered-medicines/EnteredMedicines'
 import Option1 from '../components/options/Option1'
 import Option2 from '../components/options/Option2'
@@ -19,7 +20,7 @@ export default function Results(req) {
     const calculationResult = mainTransform(medicineObjects);
 
     return (
-        <main>
+        <main id="main-content">
             <Back href='/calculator' text='Back to calulator' />
             <h1 className={styles.heading + ' h2'}>Your Results</h1>
             <p className={styles.text + ' p'}>Based on the entry of the following medications:</p>
@@ -80,6 +81,7 @@ export default function Results(req) {
                     from the PD team.
                 </li>
             </ul>
+            <BackToTop />
 
         </main>
     )
