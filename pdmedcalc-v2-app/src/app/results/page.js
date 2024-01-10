@@ -57,6 +57,29 @@ export default function Results(req) {
                 <Option3 option3={calculationResult.option3} />
             </div>)}
             <TextBox isCaution />
+            <h2 className={styles.heading + ' h3'}>Notes for use</h2>
+            <ul className={styles.bullets}>
+                <li className={styles.text + ' p'}>
+                    In the context of a patient whose swallow is unsafe, dispersible madopar is typically
+                    delivered via naso-gastric tube, in four divided doses per day. These doses are typically
+                    administered at 0800, 1200, 1600, 2000.
+                </li>
+                <li className={styles.text + ' p'}>
+                    If a patient usually takes their PD medications at other times, then adjust the
+                    delivery of the above to their pre-existing timings.
+                </li>
+                <li className={styles.text + ' p'}>
+                    If a patient usually takes their PD medications more frequently than four times a day,
+                    then adjust the delivery of the above prescription to their pre-existing frequency.
+                </li>
+                <li className={styles.text + ' p'}>
+                    Please follow local trust protocols regarding insertion and management of naso-gastric tubes.
+                </li>
+                <li className={styles.text + ' p'}>
+                    Subcutaneous apomorphine should NOT be commenced without specialist input
+                    from the PD team.
+                </li>
+            </ul>
 
         </main>
     )
