@@ -136,15 +136,15 @@ function threeOptions(arrayOfMedicines) {
 
     const justDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => medications[aMedicineObj.name].isDa);
 
-    const optionTwoObject = {
+    const optionThreeObject = {
         madoparDose: finalMadoparForJustNonDopamineAgonists,
         rotigotineDose: calculateRotigotine(justDopamineAgonists)
     };
 
     return {
         option1: finalMadopar,
-        option2: optionTwoObject,
-        option3: calculateRotigotine(arrayOfMedicines)
+        option2: calculateRotigotine(arrayOfMedicines),
+        option3: optionThreeObject
     }
 }
 

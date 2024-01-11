@@ -7,7 +7,7 @@ import MedicinesForm from '../components/medicines-form/MedicinesForm'
 export default function Calculator() {
     return (
         <main id="main-content">
-            <Back href='/' />
+            <Back href='/' text='Back' />
             <h2 className={styles.heading}>Dose Calculator</h2>
             <h3 className={styles.subheading}>Enter each medication and the frequency (per day)</h3>
             <MedicinesForm />
