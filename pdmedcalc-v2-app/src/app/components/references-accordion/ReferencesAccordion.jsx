@@ -1,10 +1,39 @@
+'use client'
+
+import Image from 'next/image'
 import Link from 'next/link'
 import styles from './references-accordion.module.scss'
 
 export default function ReferencesAccordion() {
+    const toggleDetails = () => {
+        const plusSign = document.querySelector('#plus-sign');
+        const minusSign = document.querySelector('#minus-sign');
+
+        minusSign.classList.toggle('hide');
+        plusSign.classList.toggle('hide');
+    };
+
     return (
         <details className={styles.container}>
-            <summary>References</summary>
+
+            <summary className={styles.heading + ' p'} onClick={toggleDetails}>
+                <Image
+                    src="/plus.svg"
+                    alt="Plus sign"
+                    width={24}
+                    height={24}
+                    id="plus-sign"
+                />
+                <Image
+                    src="/minus.svg"
+                    alt="Minuus sign"
+                    width={24}
+                    height={24}
+                    className='hide'
+                    id="minus-sign"
+                />
+                <span>References</span>
+            </summary>
             <ul className={styles.bullets}>
                 <li className={styles.text + ' p'}>
                     MJ MacMahon, DG MacMahon. Management of Parkinson's Disease in the Acute Hospital Environement.

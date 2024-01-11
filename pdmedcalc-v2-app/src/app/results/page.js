@@ -1,3 +1,5 @@
+'use client'
+
 import { redirect } from 'next/navigation'
 import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
