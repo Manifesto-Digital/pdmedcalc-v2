@@ -1,0 +1,246 @@
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[11].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[11].oneOf[9].use[5]!./src/app/components/back/back.module.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.back_container__aUSX7 {
+  display: inline-flex;
+  flex-direction: row;
+  margin-top: 1.5rem;
+}
+.back_container__aUSX7:hover path {
+  fill: #0E244F;
+}
+.back_container__aUSX7:focus path {
+  fill: #0B0C0C;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[11].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[11].oneOf[9].use[5]!./src/app/components/back-to-top/back-to-top.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.back-to-top_link__lEMz2 {
+  color: #235DCD;
+  display: inline-block;
+  margin-top: 2.5rem;
+}
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[11].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[11].oneOf[9].use[5]!./src/app/components/medicines-form/medicines-form.module.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.medicines-form_mobileOnly__qOxje {
+  display: block;
+}
+@media (min-width: 1024px) {
+  .medicines-form_mobileOnly__qOxje {
+    display: none;
+  }
+}
+
+.medicines-form_desktopOnly__ttR1y {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .medicines-form_desktopOnly__ttR1y {
+    display: block;
+  }
+}
+
+.medicines-form_selectsAndButtonsContainer__LsbEn {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #D8DDE0;
+  background-color: #FFFFFF;
+}
+@media (min-width: 1024px) {
+  .medicines-form_selectsAndButtonsContainer__LsbEn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: grid;
+    grid-template-columns: 33.75rem 13.125rem 13.125rem;
+  }
+}
+
+.medicines-form_label__Cv_9_ {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.medicines-form_errorMessage__JN2Nj {
+  color: #D5281B;
+}
+@media (min-width: 1024px) {
+  .medicines-form_errorMessage__JN2Nj {
+    padding: 1rem 0 0 1rem;
+  }
+}
+
+.medicines-form_errorBox__ijceT {
+  box-shadow: 0 0 0 2px #D5281B;
+}
+
+.medicines-form_select__MVoJg {
+  border: 2px solid #4C6272;
+}
+@media (min-width: 1024px) {
+  .medicines-form_select__MVoJg {
+    border: none;
+    padding: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(/_next/static/media/chevron-down.4538ebdb.svg) top 50% right 8px/24px 24px no-repeat;
+    display: block;
+    width: 100%;
+  }
+  .medicines-form_select__MVoJg.medicines-form_errorBox__ijceT {
+    border: 2px solid #4C6272;
+    margin-top: 0.5rem;
+  }
+}
+.medicines-form_select__MVoJg:focus, .medicines-form_select__MVoJg:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFEB3B;
+}
+@media (min-width: 1024px) {
+  .medicines-form_select__MVoJg:focus, .medicines-form_select__MVoJg:focus-visible {
+    border: 2px solid #4C6272;
+  }
+}
+
+.medicines-form_addAndRemoveButtonsContainer__x1htY {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+@media (min-width: 1024px) {
+  .medicines-form_addAndRemoveButtonsContainer__x1htY {
+    margin-top: 0;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    border: 1px solid #D8DDE0;
+  }
+}
+
+.medicines-form_add__ioZJW,
+.medicines-form_remove__rgTwc,
+.medicines-form_clear__C8mr3 {
+  padding: 0.5rem;
+  border: 2px solid #4C6272;
+}
+
+.medicines-form_add__ioZJW {
+  background-color: #00662F;
+  color: #FFFFFF;
+}
+.medicines-form_add__ioZJW:hover {
+  background-color: #003318;
+  color: #FFFFFF;
+}
+.medicines-form_add__ioZJW:focus {
+  background-color: #FFEB3B;
+  color: #0B0C0C;
+  outline: none;
+}
+
+.medicines-form_clear__C8mr3 {
+  background-color: #FFFFFF;
+}
+.medicines-form_clear__C8mr3:hover {
+  background-color: #4C6272;
+  color: #FFFFFF;
+}
+.medicines-form_clear__C8mr3:focus {
+  background-color: #D5281B;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.medicines-form_remove__rgTwc {
+  background-color: #4C6272;
+  color: #FFFFFF;
+}
+.medicines-form_remove__rgTwc:hover {
+  background-color: #FFFFFF;
+  color: #0B0C0C;
+}
+.medicines-form_remove__rgTwc:focus {
+  background-color: #D5281B;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.medicines-form_hide__zJeOZ {
+  display: none;
+}
+
+.medicines-form_none__b7WP5 {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.medicines-form_button__llLJY {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  display: inline-block;
+  box-shadow: 0 4px 0 0 #0B0C0C;
+  background-color: #00662F;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+}
+.medicines-form_button__llLJY:hover {
+  background-color: #003318;
+  color: #FFFFFF;
+}
+.medicines-form_button__llLJY:focus {
+  background-color: #FFEB3B;
+  color: #0B0C0C;
+  outline: none;
+}
+
+.medicines-form_formContainer__Iir7T {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 33.75rem 13.125rem 13.125rem;
+}
+
+.medicines-form_columnHeading__lxFJD {
+  background-color: #235DCD;
+  color: #FFFFFF;
+  padding: 1rem;
+  border: 1px solid #D8DDE0;
+}
+
+.medicines-form_medInputContainer__nEE3X {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.medicines-form_selected___bOQb {
+  background: #FFFFFF;
+}
+
+.medicines-form_selectAndErrorContainer__DhPfQ {
+  background-color: #FFFFFF;
+  border: 1px solid #D8DDE0;
+  display: flex;
+  flex-direction: column;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[11].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[11].oneOf[9].use[5]!./src/app/calculator/calculator-page.module.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.calculator-page_heading__vT_KN,
+.calculator-page_subheading__63x0T {
+  margin-top: 1rem;
+}
+
+.calculator-page_mobileOnly__KN8K9 {
+  display: block;
+}
+@media (min-width: 1024px) {
+  .calculator-page_mobileOnly__KN8K9 {
+    display: none;
+  }
+}

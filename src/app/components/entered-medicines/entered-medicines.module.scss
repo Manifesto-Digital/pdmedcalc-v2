@@ -1,0 +1,56 @@
+@use "../../styles/breakpoints";
+@use "../../styles/colours";
+
+.mobileOnly {
+    display: block;
+
+    @media (min-width: breakpoints.$large) {
+        display: none;
+    }
+}
+
+.desktopOnly {
+    display: none;
+
+    @media (min-width: breakpoints.$large) {
+        display: block;
+    }
+}
+
+.heading {
+    margin-top: 1rem;
+
+    @media (min-width: breakpoints.$large) {
+        margin-top: 0;
+        background-color: colours.$blue-1;
+        color: colours.$white;
+        padding: 1rem;
+        border: 1px solid colours.$grey-1;
+    }
+}
+
+.text {
+    margin-top: 0.5rem;
+}
+
+.medicineContainer {
+    background-color: colours.$white;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid colours.$grey-1;
+
+    @media (min-width: breakpoints.$large) {
+        margin: 0;
+        border-bottom: none;
+        border-top: none;
+        display: grid;
+        grid-template-columns: 42.5rem 17.5rem;
+    }
+}
+
+.headingsContainer {
+    display: grid;
+    grid-template-columns: 42.5rem 17.5rem;
+    margin-top: 1rem;
+}

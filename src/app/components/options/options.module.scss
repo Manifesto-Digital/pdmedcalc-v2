@@ -1,0 +1,48 @@
+@use "../../styles/breakpoints";
+@use "../../styles/colours";
+
+.overallContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+
+    @media (min-width: breakpoints.$large) {
+        flex-direction: row;
+    }
+}
+
+.timeContainer {
+    border: 1px solid colours.$grey-1;
+    background-color: colours.$white;
+
+    @media (min-width: breakpoints.$large) {
+        width: 15rem;
+    }
+
+    &Wide {
+        @media (min-width: breakpoints.$large) {
+            width: 33.75rem;
+        }
+    }
+
+}
+
+.heading {
+    background-color: colours.$blue-1;
+    color: colours.$white;
+    padding: 1rem;
+}
+
+.text {
+    background-color: colours.$white;
+    padding: 1rem;
+}
+
+.hideOnMobile {
+    display: none;
+
+    @media (min-width: breakpoints.$large) {
+        display: block;
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "/calculator/page": "app/calculator/page.js",
+  "/(home-page)/page": "app/(home-page)/page.js",
+  "/results/page": "app/results/page.js"
+}

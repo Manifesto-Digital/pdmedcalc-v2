@@ -1,0 +1,37 @@
+@use "../../styles/breakpoints";
+@use "../../styles/colours";
+
+.container {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background-color: colours.$white;
+    border: 1px solid colours.$grey-1;
+
+    @media (min-width: breakpoints.$large) {
+        max-width: 39.5rem;
+    }
+}
+
+.heading {
+    color: colours.$blue-2;
+    text-decoration: underline;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    position: relative;
+    right: 7px;
+    cursor: pointer;
+}
+
+.bullets {
+    padding-left: 1rem;
+}
+
+.text {
+    margin-top: 0.625rem;
+}
+
+.citation {
+    font-style: normal;
+}

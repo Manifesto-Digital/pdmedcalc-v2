@@ -16,12 +16,11 @@ This is therefore v2 of the medcalc tool.
 
 1. Clone the repo to your machine
 2. cd into the directory where you cloned it
-3. cd into pdmedcalc-v2-app
 
 ### How to start the dev server ###
 
-From inside pdmedcalc-v2-app, run ```npm run dev``` to start the development server and visit [http://localhost:3000](http://localhost:3000) to see the home page
+Run ```npm run dev``` to start the development server and visit [http://localhost:3000](http://localhost:3000) to see the home page
 
 ### How to run the tests ###
 
-From inside pdmedcalc-v2-app, run ```npm run test```
+Run ```npm run test```
