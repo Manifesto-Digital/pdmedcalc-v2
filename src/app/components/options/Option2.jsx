@@ -1,6 +1,7 @@
 import styles from './options.module.scss'
 export default function Option2({ option2 }) {
-    console.log("option 2 is: ", option2)
+    //console.log("option 2 is: ", option2)
+
     return (
         <div className={styles.overallContainer}>
             <div className={styles.timeContainerWide}>

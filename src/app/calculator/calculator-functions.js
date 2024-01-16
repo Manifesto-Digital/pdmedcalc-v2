@@ -23,25 +23,47 @@ export function calculateTotalLed(arrayOfMedicines) {
     return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
 }
 
-export function calculateMadopar(targetLED) {
+export function calculateMaxSpread(timeMadoparObj) {
 
-    const divBy100Remainder = targetLED % 100;
-    const smallerMadoparNeeded = divBy100Remainder !== 0 && divBy100Remainder <= 50;
+    const diffBtw8amLedAnd12pmLed = Math.abs(
+        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
 
-    const bigMadoparQuantity = smallerMadoparNeeded ? Math.floor(targetLED / 100) : Math.ceil(targetLED / 100);
-    const smallMadoparQuantity = smallerMadoparNeeded ? Math.ceil((targetLED - (bigMadoparQuantity * 100)) / 50) : 0;
+    const diffBtw8amLedAnd4pmLed = Math.abs(
+        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
 
-    return {
-        'Madopar Dispersible 125mg (100mg/25mg)': bigMadoparQuantity,
-        'Madopar Dispersible 62.5mg (50mg/12.5mg)': smallMadoparQuantity
-    }
+    const diffBtw8amLedAnd8pmLed = Math.abs(
+        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
+
+    const diffBtw12pmLedAnd4pmLed = Math.abs(
+        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
+
+    const diffBtw12pmLedAnd8pmLed = Math.abs(
+        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
+
+    const diffBtw4pmLedAnd8pmLed = Math.abs(
+        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
+        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
+    );
+
+    const spreads = [diffBtw8amLedAnd12pmLed, diffBtw8amLedAnd4pmLed, diffBtw8amLedAnd8pmLed, diffBtw12pmLedAnd4pmLed, diffBtw12pmLedAnd8pmLed, diffBtw4pmLedAnd8pmLed]
+
+    return Math.max(...spreads);
 }
 
-export function splitMadopar(madoparObj) {
-
+export function allocateMadopar(noOfBigMadopars, noOfSmallMadopars) {
     let bigMadoparQuantities = [0, 0, 0, 0];
 
-    for (let i = 1; i <= madoparObj['Madopar Dispersible 125mg (100mg/25mg)']; i++) {
+    for (let i = 1; i <= noOfBigMadopars; i++) {
         if (i < 5) { bigMadoparQuantities[i - 1]++; }
         else {
             const remainder = (i - 1) % 4;
@@ -52,58 +74,65 @@ export function splitMadopar(madoparObj) {
     const [bigMadopar8amQuantity, bigMadopar12pmQuantity, bigMadopar4pmQuantity, bigMadopar8pmQuantity] = bigMadoparQuantities;
 
 
-
     let smallMadoparQuantities = [0, 0, 0, 0];
-    /*
-    since small madopar (i.e. madoparObj['Madopar Dispersible 62.5mg (50mg/12.5mg)']) will only ever be 1, 
-    we just need to find out which time to slot it into
-    */
-    if (madoparObj['Madopar Dispersible 62.5mg (50mg/12.5mg)'] !== 0) {
-        const allBigMadoparQuantitiesAreTheSame = new Set(bigMadoparQuantities).size === 1;
 
-        if (allBigMadoparQuantitiesAreTheSame) {
-            smallMadoparQuantities[0] = 1;
-        }
+    let timeSlotFirstSmallMadoparShouldGoIn = bigMadoparQuantities.indexOf(Math.min(...bigMadoparQuantities)) + 1;
+
+    for (let i = timeSlotFirstSmallMadoparShouldGoIn; i <= timeSlotFirstSmallMadoparShouldGoIn + noOfSmallMadopars - 1; i++) {
+        if (i < 5) { smallMadoparQuantities[i - 1]++; }
         else {
-            if (bigMadopar12pmQuantity < bigMadopar8amQuantity) {
-                smallMadoparQuantities[1] = 1;
-            }
-            else if (bigMadopar4pmQuantity < bigMadopar12pmQuantity) {
-                smallMadoparQuantities[2] = 1;
-            }
-            else if (bigMadopar8pmQuantity < bigMadopar4pmQuantity) {
-                smallMadoparQuantities[3] = 1;
-            }
-            else {
-                smallMadoparQuantities[0] = 1;
-            }
+            const remainder = (i - 1) % 4;
+            smallMadoparQuantities[remainder]++;
         }
     }
 
     const [smallMadopar8amQuantity, smallMadopar12pmQuantity, smallMadopar4pmQuantity, smallMadopar8pmQuantity] = smallMadoparQuantities;
 
 
-
     return {
         "0800": [
-            { name: 'Madopar Dispersible 125mg (100mg/25mg)', quantity: bigMadopar8amQuantity },
-            { name: 'Madopar Dispersible 62.5mg (50mg/12.5mg)', quantity: smallMadopar8amQuantity }
+            { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: bigMadopar8amQuantity, led: 100 },
+            { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: smallMadopar8amQuantity, led: 50 }
         ],
         "1200": [
-            { name: 'Madopar Dispersible 125mg (100mg/25mg)', quantity: bigMadopar12pmQuantity },
-            { name: 'Madopar Dispersible 62.5mg (50mg/12.5mg)', quantity: smallMadopar12pmQuantity }
+            { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: bigMadopar12pmQuantity, led: 100 },
+            { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: smallMadopar12pmQuantity, led: 50 }
         ],
         "1600": [
-            { name: 'Madopar Dispersible 125mg (100mg/25mg)', quantity: bigMadopar4pmQuantity },
-            { name: 'Madopar Dispersible 62.5mg (50mg/12.5mg)', quantity: smallMadopar4pmQuantity }
+            { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: bigMadopar4pmQuantity, led: 100 },
+            { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: smallMadopar4pmQuantity, led: 50 }
         ],
         "2000": [
-            { name: 'Madopar Dispersible 125mg (100mg/25mg)', quantity: bigMadopar8pmQuantity },
-            { name: 'Madopar Dispersible 62.5mg (50mg/12.5mg)', quantity: smallMadopar8pmQuantity }
+            { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: bigMadopar8pmQuantity, led: 100 },
+            { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: smallMadopar8pmQuantity, led: 50 }
         ],
     }
-
 }
+
+export function calculateMadopar(targetLED) {
+
+    // Round down the target to the nearest 50
+    let roundedTargetLED = targetLED - (targetLED % 50);
+
+    let bestDistribution = null;
+    let minSpread = Infinity;
+
+    for (let noOfBigMadoparsNeeded = 0; noOfBigMadoparsNeeded * 100 <= roundedTargetLED; noOfBigMadoparsNeeded++) {
+        const remainder = roundedTargetLED - (noOfBigMadoparsNeeded * 100);
+        const noOfSmallMadoparsNeeded = remainder / 50;
+        const potentialNewBestDistribution = allocateMadopar(noOfBigMadoparsNeeded, noOfSmallMadoparsNeeded);
+        const spread = calculateMaxSpread(potentialNewBestDistribution);
+
+        if (spread <= minSpread) {
+            bestDistribution = potentialNewBestDistribution;
+            minSpread = spread;
+        }
+
+    }
+
+    return bestDistribution;
+}
+
 
 export function calculateRotigotine(arrayOfMedicines) {
     const correctionFactor = 0.25;
@@ -141,10 +170,9 @@ export function calculateRotigotine(arrayOfMedicines) {
 function twoOptions(arrayOfMedicines) {
     const totalLED = calculateTotalLed(arrayOfMedicines);
     const madopar = calculateMadopar(totalLED);
-    const finalMadopar = splitMadopar(madopar);
 
     return {
-        option1: finalMadopar,
+        option1: madopar,
         option2: calculateRotigotine(arrayOfMedicines)
     }
 }
@@ -153,22 +181,20 @@ function threeOptions(arrayOfMedicines) {
 
     const totalLED = calculateTotalLed(arrayOfMedicines);
     const madopar = calculateMadopar(totalLED);
-    const finalMadopar = splitMadopar(madopar);
 
     const nonDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => !medications[aMedicineObj.name].isDa);
     const totalLedOfNonDopamineAgonists = calculateTotalLed(nonDopamineAgonists);
     const madoparForJustNonDopamineAgonists = calculateMadopar(totalLedOfNonDopamineAgonists);
-    const finalMadoparForJustNonDopamineAgonists = splitMadopar(madoparForJustNonDopamineAgonists);
 
     const justDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => medications[aMedicineObj.name].isDa);
 
     const optionThreeObject = {
-        madoparDose: finalMadoparForJustNonDopamineAgonists,
+        madoparDose: madoparForJustNonDopamineAgonists,
         rotigotineDose: calculateRotigotine(justDopamineAgonists)
     };
 
     return {
-        option1: finalMadopar,
+        option1: madopar,
         option2: calculateRotigotine(arrayOfMedicines),
         option3: optionThreeObject
     }

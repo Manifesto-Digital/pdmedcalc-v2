@@ -15,7 +15,7 @@ export const metadata = {
 }
 
 export default function Results(req) {
-    console.log(req.searchParams)
+    //console.log(req.searchParams)
     if (!(req.searchParams.medicine && req.searchParams.frequency)) { redirect('/'); }
 
     const medicineObjects = [];
