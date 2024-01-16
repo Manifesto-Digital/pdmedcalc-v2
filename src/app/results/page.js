@@ -1,5 +1,3 @@
-'use client'
-
 import { redirect } from 'next/navigation'
 import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
@@ -11,6 +9,10 @@ import Option3 from '../components/options/Option3'
 import TextBox from '../components/text-box/TextBox';
 import styles from './results-page.module.scss'
 import { calculateTotalLed, mainTransform } from '../calculator/calculator-utils'
+
+export const metadata = {
+    title: 'Results',
+}
 
 export default function Results(req) {
     console.log(req.searchParams)
