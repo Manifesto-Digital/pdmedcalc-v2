@@ -2,8 +2,8 @@ import { calculateRotigotine } from "@/app/calculator/calculator-functions";
 
 describe('tests for calculateRotigotine fn', () => {
     test('works if recommended patchdose is witihin patchdose range and no rounding is required', () => {
-        const exampleMedicines = [{ name: 'Ropinirole (Requip XL) 24mg', frequencyPerDay: 1 }]
-        expect(calculateRotigotine(exampleMedicines)).toBe(4);
+        const exampleMedicines = [{ name: 'Ropinirole (Requip XL) 12mg', frequencyPerDay: 1 }]
+        expect(calculateRotigotine(exampleMedicines)).toBe(8);
     })
 
     test('works if recommended patchdose is above max patchdose and no rounding is required', () => {

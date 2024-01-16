@@ -1,6 +1,6 @@
 import styles from './options.module.scss'
 export default function Option3({ option3 }) {
-    console.log("option 3 is: ", option3);
+    //console.log("option 3 is: ", option3);
     const eightAmBigMadoparDose = option3.madoparDose['0800'][0].quantity;
     const eightAmSmallMadoparDose = option3.madoparDose['0800'][1].quantity;
     const twelvePmBigMadoparDose = option3.madoparDose['1200'][0].quantity;
@@ -9,6 +9,7 @@ export default function Option3({ option3 }) {
     const fourPmSmallMadoparDose = option3.madoparDose['1600'][1].quantity;
     const eightPmBigMadoparDose = option3.madoparDose['2000'][0].quantity;
     const eightPmSmallMadoparDose = option3.madoparDose['2000'][1].quantity;
+
     return (
         <div className={styles.overallContainer}>
             <div className={styles.timeContainer}>

@@ -1,6 +1,6 @@
 import styles from './options.module.scss'
 export default function Option1({ option1 }) {
-    console.log("option 1 is: ", option1);
+    //console.log("option 1 is: ", option1);
     const eightAmBigMadoparDose = option1['0800'][0].quantity;
     const eightAmSmallMadoparDose = option1['0800'][1].quantity;
     const twelvePmBigMadoparDose = option1['1200'][0].quantity;
@@ -9,6 +9,7 @@ export default function Option1({ option1 }) {
     const fourPmSmallMadoparDose = option1['1600'][1].quantity;
     const eightPmBigMadoparDose = option1['2000'][0].quantity;
     const eightPmSmallMadoparDose = option1['2000'][1].quantity;
+
     return (
         <div className={styles.overallContainer}>
             <div className={styles.timeContainer + ' ' + `${!eightAmBigMadoparDose && !eightAmSmallMadoparDose ? styles.hideOnMobile : ''}`}>
