@@ -9,9 +9,18 @@ export function onlyHasDopamineAgonists(arrayOfMedicines) {
 }
 
 export function calculateTotalLed(arrayOfMedicines) {
-    return arrayOfMedicines.reduce((totalLED, currentMedicineObj) => {
+    const nonComtInhibitors = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isComt);
+    const totalLedFromNonComtInhibitors = nonComtInhibitors.reduce((totalLED, currentMedicineObj) => {
         return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led);
-    }, 0)
+    }, 0);
+
+    if (nonComtInhibitors.length === arrayOfMedicines.length) { return totalLedFromNonComtInhibitors; }
+
+    const comtInhibitors = arrayOfMedicines.filter((aMedicineObj) => medications[aMedicineObj.name].isComt);
+    /* since patients should only ever really be on one comt inhibitor we can just take the first element of the above array*/
+    const theComtInhibitor = comtInhibitors[0];
+
+    return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
 }
 
 export function calculateMadopar(targetLED) {
@@ -97,13 +106,30 @@ export function splitMadopar(madoparObj) {
 }
 
 export function calculateRotigotine(arrayOfMedicines) {
-    const correctionFactor = onlyHasDopamineAgonists(arrayOfMedicines) ? 0.5 : 0.25;
-    const targetLED = calculateTotalLed(arrayOfMedicines);
+    const correctionFactor = 0.25;
+    const adjustment = 30;
     const maxPatchdose = 16;
     const minPatchdose = 2;
 
-    let patchdose = (targetLED * correctionFactor) / 20;
-    patchdose = patchdose % 2 === 0 ? patchdose : Math.floor(patchdose / 2) * 2;
+    const nonDopamineAgonists = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isDa);
+    const dopamineAgonists = arrayOfMedicines.filter((aMedicineObj) => medications[aMedicineObj.name].isDa);
+
+    const totalLedOfNonDopamineAgonists = calculateTotalLed(nonDopamineAgonists);
+    const totalLedOfDopamineAgonists = calculateTotalLed(dopamineAgonists);
+
+    const customRound = (num) => {
+        const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
+        const nearestMultipleOf2Above = Math.ceil(num / 2) * 2;
+        const thresholdForRoundingUp = nearestMultipleOf2Below + 1.5;
+
+        return num < thresholdForRoundingUp ? nearestMultipleOf2Below : nearestMultipleOf2Above;
+    }
+
+    const patchdoseForNonDopamineAgonists = (totalLedOfNonDopamineAgonists * correctionFactor) / adjustment;
+    const patchdoseForDopamineAgonists = totalLedOfDopamineAgonists / adjustment;
+
+    let patchdose = patchdoseForDopamineAgonists + patchdoseForNonDopamineAgonists;
+    patchdose = patchdose % 2 === 0 ? patchdose : customRound(patchdose);
 
     if (patchdose > maxPatchdose) { patchdose = maxPatchdose; }
     if (patchdose === 0) { patchdose = minPatchdose; }
