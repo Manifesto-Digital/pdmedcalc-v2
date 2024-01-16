@@ -1,4 +1,4 @@
-import { splitMadopar } from "@/app/calculator/calculator-utils";
+import { splitMadopar } from "@/app/calculator/calculator-functions";
 
 describe('tests for splitMadopar fn', () => {
     test('works for less than four madopars', () => {

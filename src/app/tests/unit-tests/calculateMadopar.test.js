@@ -1,4 +1,4 @@
-import { calculateMadopar } from "@/app/calculator/calculator-utils";
+import { calculateMadopar } from "@/app/calculator/calculator-functions";
 
 describe('tests for calculateMadopar fn', () => {
 
