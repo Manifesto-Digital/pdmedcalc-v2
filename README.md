@@ -2,7 +2,7 @@
 
 ## Introduction ##
 
-This Repo is for the medcalc tool, a web application that helps healthcare providers (primarily doctors and nurses) quickly and easily convert a Parkinson’s patient’s regular medicine into an equivalent dose of another medicine. 
+This repository is for the medcalc tool, a web application that helps healthcare providers (primarily doctors and nurses) quickly and easily convert a Parkinson’s patient’s regular medicine into an equivalent dose of another medicine. 
 
 The need for this tool is based on the fact that sometimes patients with Parkinson's Disease (PD) who have been admitted to hospital are unable to take their medications orally. Therefore the patient's usual oral medications need to be converted to a 'Levodopa equivalent dose' (LED), which is delivered either through a patch or via a naso-gastric tube.
 
