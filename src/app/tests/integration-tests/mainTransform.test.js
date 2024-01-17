@@ -2,7 +2,7 @@ import { mainTransform } from "@/app/calculator/calculator-functions";
 
 describe('tests for the main transform function', () => {
 
-    /* test patient data provided by James */
+    /* test patient examples provided by James */
 
     test('Patient 1', () => {
         const exampleMedicines = [
