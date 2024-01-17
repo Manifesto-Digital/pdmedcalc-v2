@@ -111,8 +111,15 @@ export function allocateMadopar(noOfBigMadopars, noOfSmallMadopars) {
 
 export function calculateMadopar(targetLED) {
 
-    // Round down the target to the nearest 50
-    let roundedTargetLED = targetLED - (targetLED % 50);
+    const roundToNearest50 = (num) => {
+        const divBy50Remainder = num % 50;
+        if (divBy50Remainder === 0) { return num; }
+        const base = num - divBy50Remainder;
+        return divBy50Remainder < 25 ? base : base + 50;
+    };
+
+    // Round the target to the nearest 50
+    let roundedTargetLED = roundToNearest50(targetLED); //targetLED - (targetLED % 50);
 
     let bestDistribution = null;
     let minSpread = Infinity;
