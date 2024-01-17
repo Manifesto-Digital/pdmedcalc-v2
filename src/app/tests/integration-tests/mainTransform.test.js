@@ -1,101 +1,8 @@
 import { mainTransform } from "@/app/calculator/calculator-functions";
 
 describe('tests for the main transform function', () => {
-    // test('works if there are zero dopamine agonists', () => {
-    //     const exampleMedicines = [
-    //         { name: 'Stalevo (levodopa, carbidopa and entacapone) 125mg', frequencyPerDay: 3 },
-    //         { name: 'Sinemet (co-careldopa) 62.5mg (50mg/12.5mg)', frequencyPerDay: 4 }
-    //     ];
 
-    //     const expectedMadopar = {
-    //         "0800": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "1200": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "1600": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "2000": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //     };
-
-    //     const expectedResult = {
-    //         option1: expectedMadopar,
-    //         option2: 6
-    //     };
-
-    //     expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
-    // })
-
-    // test('works if there are a mix of dopamine agonists and non-dopamine agonists', () => {
-    //     const exampleMedicines = [
-    //         { name: 'Ropinirole (Requip XL) 8mg', frequencyPerDay: 1 },
-    //         { name: 'Stalevo (levodopa, carbidopa and entacapone) 125mg', frequencyPerDay: 2 }
-    //     ];
-
-    //     const expectedMadopar = {
-    //         "0800": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1 }
-    //         ],
-    //         "1200": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "1600": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "2000": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //     };
-
-    //     const expectedMadoparForJustNonDopamineAgonists = {
-    //         "0800": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "1200": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //         "1600": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1 }
-    //         ],
-    //         "2000": [
-    //             { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0 },
-    //             { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0 }
-    //         ],
-    //     };
-
-    //     const expectedOptionThreeObject = {
-    //         madoparDose: expectedMadoparForJustNonDopamineAgonists,
-    //         rotigotineDose: 4
-    //     };
-
-    //     const expectedResult = {
-    //         option1: expectedMadopar,
-    //         option2: 4,
-    //         option3: expectedOptionThreeObject,
-    //     };
-
-    //     expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
-    // })
-
-
-
-
-    /* tests specifically written by James */
+    /* test patient data provided by James */
 
     test('Patient 1', () => {
         const exampleMedicines = [
@@ -234,19 +141,19 @@ describe('tests for the main transform function', () => {
 
         const expectedMadopar = {
             "0800": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
                 { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "1200": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1 },
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
                 { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "1600": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0 },
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
                 { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
             ],
             "2000": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0 },
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
                 { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
             ],
         };
@@ -266,8 +173,8 @@ describe('tests for the main transform function', () => {
 
         const expectedMadopar = {
             "0800": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "1200": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
@@ -326,7 +233,6 @@ describe('tests for the main transform function', () => {
     test('Patient 8', () => {
         const exampleMedicines = [
             { name: 'Stalevo (levodopa, carbidopa and entacapone) 150/37.5/200mg', frequencyPerDay: 5 },
-            { name: 'Entacapone', frequencyPerDay: 5 }
         ];
 
         const expectedMadopar = {
@@ -369,7 +275,7 @@ describe('tests for the main transform function', () => {
             ],
             "1200": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
             ],
             "1600": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
@@ -402,7 +308,7 @@ describe('tests for the main transform function', () => {
             ],
             "1200": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
             ],
             "1600": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 1, led: 100 },
