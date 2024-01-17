@@ -167,7 +167,7 @@ export function calculateRotigotine(arrayOfMedicines) {
 }
 
 
-function twoOptions(arrayOfMedicines) {
+export function mainTransform(arrayOfMedicines) {
     const totalLED = calculateTotalLed(arrayOfMedicines);
     const madopar = calculateMadopar(totalLED);
 
@@ -175,34 +175,4 @@ function twoOptions(arrayOfMedicines) {
         option1: madopar,
         option2: calculateRotigotine(arrayOfMedicines)
     }
-}
-
-function threeOptions(arrayOfMedicines) {
-
-    const totalLED = calculateTotalLed(arrayOfMedicines);
-    const madopar = calculateMadopar(totalLED);
-
-    const nonDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => !medications[aMedicineObj.name].isDa);
-    const totalLedOfNonDopamineAgonists = calculateTotalLed(nonDopamineAgonists);
-    const madoparForJustNonDopamineAgonists = calculateMadopar(totalLedOfNonDopamineAgonists);
-
-    const justDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => medications[aMedicineObj.name].isDa);
-
-    const optionThreeObject = {
-        madoparDose: madoparForJustNonDopamineAgonists,
-        rotigotineDose: calculateRotigotine(justDopamineAgonists)
-    };
-
-    return {
-        option1: madopar,
-        option2: calculateRotigotine(arrayOfMedicines),
-        option3: optionThreeObject
-    }
-}
-
-export function mainTransform(arrayOfMedicines) {
-    const hasDopamineAgonistsAndNonDopamineAgonists = hasDopamineAgonist(arrayOfMedicines) && !onlyHasDopamineAgonists(arrayOfMedicines);
-
-    if (hasDopamineAgonistsAndNonDopamineAgonists) { return threeOptions(arrayOfMedicines); }
-    else { return twoOptions(arrayOfMedicines); }
 }
