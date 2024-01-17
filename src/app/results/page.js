@@ -5,7 +5,6 @@ import BackToTop from '../components/back-to-top/BackToTop';
 import EnteredMedicines from '../components/entered-medicines/EnteredMedicines'
 import Option1 from '../components/options/Option1'
 import Option2 from '../components/options/Option2'
-import Option3 from '../components/options/Option3'
 import TextBox from '../components/text-box/TextBox';
 import styles from './results-page.module.scss'
 import { calculateTotalLed, mainTransform } from '../calculator/calculator-functions'
@@ -34,7 +33,7 @@ export default function Results(req) {
                 the total levodopa equivalent dose for this patient is <span className='h6'>{calculateTotalLed(medicineObjects)} mg per day.</span>
             </p>
             <p className={styles.text + ' p'}>
-                The equivalent dose of levodopa for this patient can be provided in {Object.keys(calculationResult).length} different ways;
+                The equivalent dose of levodopa for this patient can be provided in 2 different ways;
                 below is a brief explanation of each option and the accompanying suggested prescription.
             </p>
             <h2 className={styles.heading + ' h5'}>Option 1: </h2>
@@ -50,18 +49,6 @@ export default function Results(req) {
                 patient is for palliation.
             </p>
             <Option2 option2={calculationResult.option2} />
-            {calculationResult.option3 && (<div>
-                <h2 className={styles.heading + ' h5'}>Option 3: </h2>
-                <p className={styles.text}>
-                    Conversion of usual levodopa containing medications for administration via naso-gastric tube using dispersible madopar (co-beneldopa)
-                </p>
-                <p className={styles.text}>AND</p>
-                <p className={styles.text}>Conversion of usual dopamine agonist medications for administration via rotigotine trans-dermal patch</p>
-                <p className={styles.text + ' ' + styles.textFaded}>
-                    N.B. This option may be preferred by some Parkinson's Disease specialist doctors and nurses.
-                </p>
-                <Option3 option3={calculationResult.option3} />
-            </div>)}
             <TextBox isCaution />
             <h2 className={styles.heading + ' h3'}>Notes for use</h2>
             <ul className={styles.bullets}>

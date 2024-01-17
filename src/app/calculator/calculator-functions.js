@@ -111,8 +111,15 @@ export function allocateMadopar(noOfBigMadopars, noOfSmallMadopars) {
 
 export function calculateMadopar(targetLED) {
 
-    // Round down the target to the nearest 50
-    let roundedTargetLED = targetLED - (targetLED % 50);
+    const roundToNearest50 = (num) => {
+        const divBy50Remainder = num % 50;
+        if (divBy50Remainder === 0) { return num; }
+        const base = num - divBy50Remainder;
+        return divBy50Remainder < 25 ? base : base + 50;
+    };
+
+    // Round the target to the nearest 50
+    let roundedTargetLED = roundToNearest50(targetLED); //targetLED - (targetLED % 50);
 
     let bestDistribution = null;
     let minSpread = Infinity;
@@ -167,7 +174,7 @@ export function calculateRotigotine(arrayOfMedicines) {
 }
 
 
-function twoOptions(arrayOfMedicines) {
+export function mainTransform(arrayOfMedicines) {
     const totalLED = calculateTotalLed(arrayOfMedicines);
     const madopar = calculateMadopar(totalLED);
 
@@ -175,34 +182,4 @@ function twoOptions(arrayOfMedicines) {
         option1: madopar,
         option2: calculateRotigotine(arrayOfMedicines)
     }
-}
-
-function threeOptions(arrayOfMedicines) {
-
-    const totalLED = calculateTotalLed(arrayOfMedicines);
-    const madopar = calculateMadopar(totalLED);
-
-    const nonDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => !medications[aMedicineObj.name].isDa);
-    const totalLedOfNonDopamineAgonists = calculateTotalLed(nonDopamineAgonists);
-    const madoparForJustNonDopamineAgonists = calculateMadopar(totalLedOfNonDopamineAgonists);
-
-    const justDopamineAgonists = arrayOfMedicines.filter(aMedicineObj => medications[aMedicineObj.name].isDa);
-
-    const optionThreeObject = {
-        madoparDose: madoparForJustNonDopamineAgonists,
-        rotigotineDose: calculateRotigotine(justDopamineAgonists)
-    };
-
-    return {
-        option1: madopar,
-        option2: calculateRotigotine(arrayOfMedicines),
-        option3: optionThreeObject
-    }
-}
-
-export function mainTransform(arrayOfMedicines) {
-    const hasDopamineAgonistsAndNonDopamineAgonists = hasDopamineAgonist(arrayOfMedicines) && !onlyHasDopamineAgonists(arrayOfMedicines);
-
-    if (hasDopamineAgonistsAndNonDopamineAgonists) { return threeOptions(arrayOfMedicines); }
-    else { return twoOptions(arrayOfMedicines); }
 }

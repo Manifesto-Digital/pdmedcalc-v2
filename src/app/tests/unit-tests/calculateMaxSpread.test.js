@@ -110,5 +110,4 @@ describe('tests for calculateMaxSpread fn', () => {
         expect(calculateMaxSpread(timeMadoparObj5)).toEqual(450);
     })
 
-
 });
