@@ -63,6 +63,7 @@
         -moz-appearance: none;
         background: url('../../../../public/chevron-down.svg') top 50% right 8px/24px 24px no-repeat;
         display: block;
+        height: 100%;
         width: 100%;
 
         &.errorBox {
