@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation'
+import { useSearchParams, redirect } from 'next/navigation'
 import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
 import BackToTop from '../components/back-to-top/BackToTop';
@@ -15,11 +15,14 @@ export const metadata = {
 
 export default function Results(req) {
     //console.log(req.searchParams)
-    if (!(req.searchParams.medicine && req.searchParams.frequency)) { redirect('/'); }
+    const searchParams = useSearchParams()
+    const medicine = searchParams.get('medicine');
+    const frequency = searchParams.get('frequency');
+    if (!(medicine && frequency)) { redirect('/'); }
 
     const medicineObjects = [];
-    for (let i = 0; i < req.searchParams.medicine.length - 1; i++) {
-        medicineObjects.push({ name: req.searchParams.medicine[i], frequencyPerDay: req.searchParams.frequency[i] });
+    for (let i = 0; i < medicine.length - 1; i++) {
+        medicineObjects.push({ name: medicine[i], frequencyPerDay: frequency[i] });
     }
     const calculationResult = mainTransform(medicineObjects);
 
