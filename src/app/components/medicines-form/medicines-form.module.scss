@@ -54,6 +54,7 @@
 .select {
 
     border: 2px solid colours.$grey-4;
+    background-color: colours.$white;
 
     @media (min-width: breakpoints.$large) {
         border: none;
