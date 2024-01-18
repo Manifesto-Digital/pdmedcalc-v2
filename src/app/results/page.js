@@ -1,4 +1,6 @@
-import { useSearchParams, redirect } from 'next/navigation'
+'use client'
+
+import { redirect, useSearchParams } from 'next/navigation'
 import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
 import BackToTop from '../components/back-to-top/BackToTop';
@@ -9,21 +11,19 @@ import TextBox from '../components/text-box/TextBox';
 import styles from './results-page.module.scss'
 import { calculateTotalLed, mainTransform } from '../calculator/calculator-functions'
 
-export const metadata = {
-    title: 'Results',
-}
 
-export default function Results(req) {
-    //console.log(req.searchParams)
+export default function Results() {
     const searchParams = useSearchParams()
-    const medicine = searchParams.get('medicine');
-    const frequency = searchParams.get('frequency');
-    if (!(medicine && frequency)) { redirect('/'); }
+    const medicines = searchParams.getAll('medicine');
+    const frequencies = searchParams.getAll('frequency');
+
+    if (!(medicines.length > 1 && frequencies.length > 1)) { redirect('/'); }
 
     const medicineObjects = [];
-    for (let i = 0; i < medicine.length - 1; i++) {
-        medicineObjects.push({ name: medicine[i], frequencyPerDay: frequency[i] });
+    for (let i = 0; i < medicines.length - 1; i++) {
+        medicineObjects.push({ name: medicines[i], frequencyPerDay: frequencies[i] });
     }
+    //console.log("med objects ", medicineObjects);
     const calculationResult = mainTransform(medicineObjects);
 
     return (
