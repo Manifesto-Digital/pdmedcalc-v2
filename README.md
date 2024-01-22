@@ -16,6 +16,7 @@ This is therefore v2 of the medcalc tool.
 
 1. Clone the repo to your machine
 2. cd into the directory where you cloned it
+3. Run ```npm install``` to install dependencies
 
 ### How to start the dev server ###
 
