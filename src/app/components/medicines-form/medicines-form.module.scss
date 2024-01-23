@@ -1,0 +1,214 @@
+@use "../../styles/breakpoints";
+@use "../../styles/colours";
+
+.mobileOnly {
+    display: block;
+
+    @media (min-width: breakpoints.$large) {
+        display: none;
+    }
+}
+
+.desktopOnly {
+    display: none;
+
+    @media (min-width: breakpoints.$large) {
+        display: block;
+    }
+}
+
+.selectsAndButtonsContainer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid colours.$grey-1;
+    background-color: colours.$white;
+
+    @media (min-width: breakpoints.$large) {
+        margin: 0;
+        padding: 0;
+        border: none;
+        display: grid;
+        grid-template-columns: 33.75rem 13.125rem 13.125rem;
+    }
+}
+
+.label {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem
+}
+
+.errorMessage {
+    color: colours.$red-1;
+
+    @media (min-width: breakpoints.$large) {
+        padding: 1rem 0 0 1rem;
+    }
+}
+
+.errorBox {
+    box-shadow: 0 0 0 2px colours.$red-1;
+}
+
+.select {
+
+    border: 2px solid colours.$grey-4;
+    background-color: colours.$white;
+
+    @media (min-width: breakpoints.$large) {
+        border: none;
+        padding: 1rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('../../../../public/chevron-down.svg') top 50% right 8px/24px 24px no-repeat;
+        display: block;
+        height: 100%;
+        width: 100%;
+
+        &.errorBox {
+            border: 2px solid colours.$grey-4;
+            margin-top: 0.5rem;
+        }
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px colours.$yellow-1;
+
+        @media (min-width: breakpoints.$large) {
+            border: 2px solid colours.$grey-4;
+        }
+    }
+}
+
+.addAndRemoveButtonsContainer {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    @media (min-width: breakpoints.$large) {
+        margin-top: 0;
+        padding: 1rem;
+        background-color: colours.$white;
+        border: 1px solid colours.$grey-1;
+    }
+}
+
+.add,
+.remove,
+.clear {
+    padding: 0.5rem;
+    border: 2px solid colours.$grey-4;
+}
+
+.add {
+    background-color: colours.$green-1;
+    color: colours.$white;
+
+    &:hover {
+        background-color: colours.$green-2;
+        color: colours.$white;
+    }
+
+    &:focus {
+        background-color: colours.$yellow-1;
+        color: colours.$black-1;
+        outline: none;
+    }
+}
+
+.clear {
+    background-color: colours.$white;
+
+    &:hover {
+        background-color: colours.$grey-4;
+        color: colours.$white;
+    }
+
+    &:focus {
+        background-color: colours.$red-1;
+        color: colours.$white;
+        outline: none;
+    }
+}
+
+.remove {
+
+    background-color: colours.$grey-4;
+    color: colours.$white;
+
+    &:hover {
+        background-color: colours.$white;
+        color: colours.$black-1;
+    }
+
+    &:focus {
+        background-color: colours.$red-1;
+        color: colours.$white;
+        outline: none;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.none {
+    appearance: none;
+}
+
+.button {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    display: inline-block;
+    box-shadow: 0 4px 0 0 colours.$black-1;
+    background-color: colours.$green-1;
+    color: colours.$white;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+
+    &:hover {
+        background-color: colours.$green-2;
+        color: colours.$white;
+    }
+
+    &:focus {
+        background-color: colours.$yellow-1;
+        color: colours.$black-1;
+        outline: none;
+    }
+}
+
+.formContainer {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 33.75rem 13.125rem 13.125rem;
+}
+
+.columnHeading {
+    background-color: colours.$blue-1;
+    color: colours.$white;
+    padding: 1rem;
+    border: 1px solid colours.$grey-1;
+}
+
+.medInputContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.selected {
+    background: colours.$white;
+}
+
+.selectAndErrorContainer {
+    background-color: colours.$white;
+    border: 1px solid colours.$grey-1;
+    display: flex;
+    flex-direction: column;
+}
