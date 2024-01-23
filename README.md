@@ -18,23 +18,28 @@ There is no database component. The details of the drugs involved in the calcula
 
 ## Version control ##
 
-The application uses the Git version control system and the GitFLow branching strategy.
+The application uses the [Git version control system](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control) and the [GitFLow branching strategy](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
+
 The code is hosted on GitHub. The location of the repository is: https://github.com/tpximpact/pdmedcalc-v2 
+
+The production branch is called `main`
+The development branch is called `develop`
 
 ## Hosting and deployment ##
 
-The application is hosted on CloudFlare pages.
-CloudFlare is also used as the NameServer and provides security protection for the site including WAF and DDOS.
+The application is hosted on [CloudFlare pages](https://pages.cloudflare.com/).
+CloudFlare is also used as the NameServer and provides security protection for the site including [DDOS protection](https://www.cloudflare.com/en-gb/application-services/products/ddos-for-web/).
 
 CloudFlare Pages also provides the deployment pipeline.
 The CloudFlare pages application is connected to the GitHub repository. A deployment is triggered when code is committed to the main or develop branch.
 The application is automatically tested and built as part of the deployment pipeline.
 
 Code changes to the main branch are deployed to production.
-Code changes to the develop branch are deployed to the test environment.
+Code changes to any other branch are deployed to a test environment.
 
-The production URL is:
-The test URL is:
+The production URL is: https://pdmedcalc.co.uk
+
+A new test environment is created each time code is pushed to a non production branch. The test URL follows the pattern: https://[commit-hash].pdmedcalc-v2.pages.dev/ e.g. https://7047263d.pdmedcalc-v2.pages.dev/
 
 Note: There isn't a configuration file in the repository for CloudFlare. Configuration is provided inside the CloudFlare pages interface.
 
@@ -48,6 +53,44 @@ Note: There isn't a configuration file in the repository for CloudFlare. Configu
 
 Run ```npm run dev``` to start the development server and visit [http://localhost:3000](http://localhost:3000) to see the home page
 
+### How to run the tests ###
+
+Run ```npm run test```
+
+### How to build the static application ###
+
+Run ```npm run build```
+
+The static assets can then be found in the generated `out` folder.
+
+### Deployment script ###
+
+The automated deployment script which runs when a deployment is triggered is:
+
+```npm run test && npm run build```
+
+Note: this is configured inside the CloudFlare pages interface, there isn't a separate build script file or hosting configuration file.
+
+### Google Analytics ###
+
+Google Analytics is integrated with the site for the purposes of counting the number of users.
+
+### Cookies ###
+
+The site does not set cookies or store any activity undertaken by the users.
+
+## Paid for components ##
+
+There are no commercially licensed software libraries in this application.
+The CloudFlare hosting environment is being used on the free tier. 
+Google Analytics is being used on the free tier.
+The production domain registration is being provided by 123-reg.co.uk
+
+## Version ##
+
+This project is based upon an [older version of the MedCalc](https://bitbucket.org/tpximpactdx/pdmedcalc-old/src/main/).
+
+This is therefore version 2 of the MedCalc tool.
 
 ## How it works ##
 
@@ -63,7 +106,6 @@ Run ```npm run dev``` to start the development server and visit [http://localhos
   3. a conversion of the entered medications to a dispersible madopar split across four dose times i.e. option 1
   4. a conversion of medications to a transdermal rotigotine patch i.e. option 2
 
-
 ### The calculation rules ###
 
 See the 'rules of the calculator doc' for a detailed explanation written by James Fisher.
@@ -74,7 +116,7 @@ Although this project uses javascript rather than typescript, the types for the 
 
 #### Data storage ####
 
-No user data is stored. The only data this app stores is related to the medicines themselves. 
+No user data is stored. The only data this app stores is related to the medicines themselves.
 
 This app therefore does not have a database because it does not really need one since there are only 56 different medicines and we only need to know three different properties of each; having a database for the sake of one table with four columns and just 56 entries is unnecessary.
 
@@ -94,7 +136,7 @@ type Medications = {
 } 
 ```
 
-Each property of the ```medications``` object is a string representing the name of that medicine. The value of this property is an object with ```led```, ```isDa``` and ```isComt``` properties. 
+Each property of the ```medications``` object is a string representing the name of that medicine. The value of this property is an object with ```led```, ```isDa``` and ```isComt``` properties.
 
 ```led``` represents the levodopa equivalent dose for one unit of this medicine.
 
@@ -106,7 +148,7 @@ Each property of the ```medications``` object is a string representing the name 
 
 All the functions responsible for the actual conversion of the medicines are in ```src/app/calculator/calculator-functions.js```.
 
-These functions are written in a functional programming style; they are __pure__ i.e. they take an input and return an output without mutating the original input or having any other side-effect. 
+These functions are written in a functional programming style; they are __pure__ i.e. they take an input and return an output without mutating the original input or having any other side-effect.
 
 ##### The mainTransform function #####
 
@@ -130,7 +172,7 @@ The two options object that the ```mainTransform``` function returns is of the t
 }
 ```
 
-where 
+where
 
 ```ts
 type TimeMadoparObject = {
@@ -221,50 +263,3 @@ This is calculated by:
 - calculating the total led for each time slot
 - calculating the difference in total leds between each time slot
 - returning the maximum difference in total led between the time slots
-
-## Tests ##
-
-### Testing straregy ###
-
-
-
-### How to run the tests ###
-
-Run ```npm run test```
-
-
-
-### How to build the static application ###
-
-Run ```npm run build```
-
-The static assets can then be found in the generated `out` folder.
-
-### Deployment script ###
-
-The automated deployment script which runs when a deployment is triggered is:
-
-```npm run test && npm run build```
-
-Note: this is configured inside the CloudFlare pages interface, there isn't a separate build script file or hosting configuration file.
-
-### Google Analytics ###
-
-Google Analytics is integrated with the site for the purposes of counting the number of users.
-
-### Cookies ###
-
-The site does not set cookies or store any activity undertaken by the users.
-
-## Paid for components ##
-
-There are no commercially licensed software libraries in this application.
-The CloudFlare hosting environment is being used on the free tier. 
-Google Analytics is being used on the free tier.
-The production domain registration is being provided by 
-
-## Version ##
-
-This project is based upon an [older version of the MedCalc](https://bitbucket.org/tpximpactdx/pdmedcalc-old/src/main/).
-
-This is therefore version 2 of the MedCalc tool.
