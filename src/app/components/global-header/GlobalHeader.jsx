@@ -5,10 +5,10 @@ export default function GlobalHeader() {
     return (
         <header className={styles.header}>
             <Image
-                src="/parkinsons-logo.svg"
-                alt="Parkinson's Logo"
-                width={146}
-                height={22}
+                src="/parkinsons-excellence-network-logo.svg"
+                alt="Parkinson's Excellence Network Logo"
+                width={154}
+                height={91}
             />
         </header>
     )
