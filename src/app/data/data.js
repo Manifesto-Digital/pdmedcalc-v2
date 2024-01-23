@@ -56,8 +56,3 @@ export const medications = {
     'Tolcapone': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
     'Opicapone': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
 }
-
-export const dispersibles = {
-    '125mg dispersible': { name: 'Madopar Dispersible 125mg (25/100mg)', led: 100 },
-    '62.5mg dispersible': { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', led: 50 }
-};
