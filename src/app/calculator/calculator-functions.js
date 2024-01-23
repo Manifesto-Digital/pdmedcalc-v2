@@ -11,7 +11,7 @@ export function calculateTotalLed(arrayOfMedicines) {
     const comtInhibitors = arrayOfMedicines
         .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
         .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
-    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustmenty*/
+    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment*/
     const theComtInhibitor = comtInhibitors[0];
 
     return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
@@ -19,35 +19,17 @@ export function calculateTotalLed(arrayOfMedicines) {
 
 export function calculateMaxSpread(timeMadoparObj) {
 
-    const diffBtw8amLedAnd12pmLed = Math.abs(
-        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
+    const totalLed8am = timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0);
+    const totalLed12pm = timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0);
+    const totalLed4pm = timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0);
+    const totalLed8pm = timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0);
 
-    const diffBtw8amLedAnd4pmLed = Math.abs(
-        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
-
-    const diffBtw8amLedAnd8pmLed = Math.abs(
-        timeMadoparObj["0800"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
-
-    const diffBtw12pmLedAnd4pmLed = Math.abs(
-        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
-
-    const diffBtw12pmLedAnd8pmLed = Math.abs(
-        timeMadoparObj["1200"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
-
-    const diffBtw4pmLedAnd8pmLed = Math.abs(
-        timeMadoparObj["1600"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0) -
-        timeMadoparObj["2000"].reduce((totalLED, aMadopar) => totalLED + (aMadopar.quantity * aMadopar.led), 0)
-    );
+    const diffBtw8amLedAnd12pmLed = Math.abs(totalLed8am - totalLed12pm);
+    const diffBtw8amLedAnd4pmLed = Math.abs(totalLed8am - totalLed4pm);
+    const diffBtw8amLedAnd8pmLed = Math.abs(totalLed8am - totalLed8pm);
+    const diffBtw12pmLedAnd4pmLed = Math.abs(totalLed12pm - totalLed4pm);
+    const diffBtw12pmLedAnd8pmLed = Math.abs(totalLed12pm - totalLed8pm);
+    const diffBtw4pmLedAnd8pmLed = Math.abs(totalLed4pm - totalLed8pm);
 
     const spreads = [diffBtw8amLedAnd12pmLed, diffBtw8amLedAnd4pmLed, diffBtw8amLedAnd8pmLed, diffBtw12pmLedAnd4pmLed, diffBtw12pmLedAnd8pmLed, diffBtw4pmLedAnd8pmLed]
 
