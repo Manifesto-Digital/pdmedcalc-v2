@@ -12,8 +12,10 @@ export function calculateTotalLed(arrayOfMedicines) {
 
     if (nonComtInhibitors.length === arrayOfMedicines.length) { return totalLedFromNonComtInhibitors; }
 
-    const comtInhibitors = arrayOfMedicines.filter((aMedicineObj) => medications[aMedicineObj.name].isComt);
-    /* since patients should only ever really be on one comt inhibitor we can just take the first element of the above array*/
+    const comtInhibitors = arrayOfMedicines
+        .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
+        .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
+    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustmenty*/
     const theComtInhibitor = comtInhibitors[0];
 
     return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
