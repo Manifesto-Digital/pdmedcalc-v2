@@ -27,7 +27,7 @@ Run ```npm run dev``` to start the development server and visit [http://localhos
 
 ### Program flow ###
 
-![Program flow](/assets/readme-images/program-flow.png)
+<img width="743" alt="program-flow" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/473c70f5-83e0-4322-9a99-ca82441fd42b">
 
 - Users land on the home page, read the information presented and accept the disclaimer. This redirects the user to the calculator page.
 - On the calculator page, users enter the respective medications and frequencies using the select dropdowns and the add button. Once the user is done adding medicines they then submit the form by clicking on the calculate button. This redirects the user to the results page.
@@ -84,7 +84,7 @@ These functions are written in a functional programming style; they are __pure__
 
 ##### The mainTransform function #####
 
-![mainTransform](/assets/readme-images/mainTransform.png)
+<img width="376" alt="mainTransform" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/a46ae80c-7fb1-4816-95b9-ca7dff72c4f1">
 
 The ```mainTransform``` function takes an array of medicine objects. Each medicine object is formed by looping through the search params of the results page's url and is of the type
 
@@ -126,7 +126,7 @@ type TimeMadparTuple = [
 
 ##### The calculateRotigotine function #####
 
-![calculateRotigotine](/assets/readme-images/calculateRotigotine.png)
+<img width="391" alt="calculateRotigotine" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/853db0e4-5a1d-4622-8caf-83821b28df27">
 
 The ```calculateRotigotine``` function takes an array of medicine objects and returns a number representing the equivalent patchdose in mg for these medicines.
 
@@ -142,7 +142,7 @@ The patchdose is calculated by:
 
 ##### The calculateTotalLed function #####
 
-![calculateTotalLed](/assets/readme-images/calculateTotalLed.png)
+<img width="371" alt="calculateTotalLed" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/e321630f-45a7-4a78-a122-cc4e8041231e">
 
 The ```calculateTotalLed``` function takes an array of medicine objects and returns a number representing the total levodopa equivalent dose for these medicines.
 
@@ -159,7 +159,7 @@ This total led is calculated by:
 
 ##### The calculateMadopar function #####
 
-![calculateMadopar](/assets/readme-images/calculateMadopar.png)
+<img width="433" alt="calculateMadopar" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/82c9ed38-b4d1-47cb-8b3c-1206a483f1d8">
 
 The ```calculateMadopar``` function takes a targetLED and returns a ```TimeMadoparObject``` representing an equivalent total led in the form of dispersible madopar split across four dose times.
 
@@ -174,7 +174,7 @@ This is calculated by:
 
 ##### The allocateMadopar function #####
 
-![allocateMadopar](/assets/readme-images/allocateMadopar.png)
+<img width="522" alt="allocateMadopar" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/acd34fd5-4383-43be-9b9f-bb2ef1121b4d">
 
 The ```allocateMadopar``` function takes two arguments; ```noOfBigMadopars``` and ```noOfSmallMadopars```. It returns a ```TimeMadoparObject``` representing an equivalent total led in the form of dispersible madopar split across four dose times.
 
@@ -186,7 +186,7 @@ This allocation is done by:
 
 ##### The calculateMaxSpread function #####
 
-![calculateMaxSpread](/assets/readme-images/calculateMaxSpread.png)
+<img width="424" alt="calculateMaxSpread" src="https://github.com/tpximpact/pdmedcalc-v2/assets/95880683/b5accd2d-c56e-4f40-b570-26106ff97be8">
 
 The ```calculateMaxSpread``` function takes a ```TimeMadoparObject``` and returns a number representing the maximum difference in total leds between the time slot with the highest total led and the time slot with the lowest total led.
 
