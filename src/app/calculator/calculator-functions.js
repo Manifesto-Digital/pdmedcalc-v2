@@ -4,10 +4,6 @@ export function hasDopamineAgonist(arrayOfMedicines) {
     return arrayOfMedicines.some((aMedicineObj) => medications[aMedicineObj.name].isDa);
 }
 
-export function onlyHasDopamineAgonists(arrayOfMedicines) {
-    return arrayOfMedicines.every((aMedicineObj) => medications[aMedicineObj.name].isDa);
-}
-
 export function calculateTotalLed(arrayOfMedicines) {
     const nonComtInhibitors = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isComt);
     const totalLedFromNonComtInhibitors = nonComtInhibitors.reduce((totalLED, currentMedicineObj) => {
@@ -16,8 +12,10 @@ export function calculateTotalLed(arrayOfMedicines) {
 
     if (nonComtInhibitors.length === arrayOfMedicines.length) { return totalLedFromNonComtInhibitors; }
 
-    const comtInhibitors = arrayOfMedicines.filter((aMedicineObj) => medications[aMedicineObj.name].isComt);
-    /* since patients should only ever really be on one comt inhibitor we can just take the first element of the above array*/
+    const comtInhibitors = arrayOfMedicines
+        .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
+        .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
+    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustmenty*/
     const theComtInhibitor = comtInhibitors[0];
 
     return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
@@ -118,8 +116,7 @@ export function calculateMadopar(targetLED) {
         return divBy50Remainder < 25 ? base : base + 50;
     };
 
-    // Round the target to the nearest 50
-    let roundedTargetLED = roundToNearest50(targetLED); //targetLED - (targetLED % 50);
+    let roundedTargetLED = roundToNearest50(targetLED);
 
     let bestDistribution = null;
     let minSpread = Infinity;
