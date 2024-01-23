@@ -118,8 +118,7 @@ export function calculateMadopar(targetLED) {
         return divBy50Remainder < 25 ? base : base + 50;
     };
 
-    // Round the target to the nearest 50
-    let roundedTargetLED = roundToNearest50(targetLED); //targetLED - (targetLED % 50);
+    let roundedTargetLED = roundToNearest50(targetLED);
 
     let bestDistribution = null;
     let minSpread = Infinity;
