@@ -71,9 +71,10 @@ The automated deployment script which runs when a deployment is triggered is:
 
 Note: this is configured inside the CloudFlare pages interface, there isn't a separate build script file or hosting configuration file.
 
-### Google Analytics ###
+### CloudFlare Analytics ###
 
-Google Analytics is integrated with the site for the purposes of counting the number of users.
+CloudFlare Analytics is integrated with the site for the purposes of counting the number of users.
+It can be accessed on the Web Analytics part of the CloudFlare Dashboard.
 
 ### Cookies ###
 
@@ -83,7 +84,7 @@ The site does not set cookies or store any activity undertaken by the users.
 
 There are no commercially licensed software libraries in this application.
 The CloudFlare hosting environment is being used on the free tier. 
-Google Analytics is being used on the free tier.
+CloudFlare Analytics is being used on the free tier.
 The production domain registration is being provided by 123-reg.co.uk
 
 ## Version ##
