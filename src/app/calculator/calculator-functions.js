@@ -1,9 +1,5 @@
 import { medications } from "../data/data";
 
-export function hasDopamineAgonist(arrayOfMedicines) {
-    return arrayOfMedicines.some((aMedicineObj) => medications[aMedicineObj.name].isDa);
-}
-
 export function calculateTotalLed(arrayOfMedicines) {
     const nonComtInhibitors = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isComt);
     const totalLedFromNonComtInhibitors = nonComtInhibitors.reduce((totalLED, currentMedicineObj) => {
