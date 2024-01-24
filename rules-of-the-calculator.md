@@ -47,12 +47,7 @@ Note that, in practice, patients would only ever be on one COMT inhibitor, we wo
 
 ### Other ###
 
-- Rasagiline
-- Selegiline
-- Safinamide
-- Amantadine
-
-These medicines can be ignored within calculations, and don’t need to appear in the list of available medications.
+- Amantadine can be ignored within calculations, and doesn’t need to appear in the list of available medications.
 
 ## OUTPUTS OF THE CALCULATOR ##
 

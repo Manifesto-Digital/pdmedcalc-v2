@@ -104,7 +104,7 @@ describe('tests for the main transform function', () => {
     test('Patient 4', () => {
         const exampleMedicines = [
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 5 },
-            { name: 'Entacapone', frequencyPerDay: 5 }
+            { name: 'Entacapone 200mg', frequencyPerDay: 5 }
         ];
 
         const expectedMadopar = {

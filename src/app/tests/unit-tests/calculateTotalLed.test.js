@@ -15,21 +15,21 @@ describe('tests for calculateTotalLed fn', () => {
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 2 },
             { name: 'Pramipexole (Mirapexin) Prolonged Release 260µg base (375µg salt)', frequencyPerDay: 1 },
             { name: 'Stalevo (levodopa, carbidopa and entacapone) 175/43.75/200mg', frequencyPerDay: 3 },
-            { name: 'Tolcapone', frequencyPerDay: 3 },
+            { name: 'Tolcapone 100mg', frequencyPerDay: 3 },
         ];
 
         const exampleMedicines2 = [
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 2 },
             { name: 'Pramipexole (Mirapexin) Prolonged Release 260µg base (375µg salt)', frequencyPerDay: 1 },
             { name: 'Stalevo (levodopa, carbidopa and entacapone) 175/43.75/200mg', frequencyPerDay: 3 },
-            { name: 'Entacapone', frequencyPerDay: 3 },
+            { name: 'Entacapone 200mg', frequencyPerDay: 3 },
         ];
 
         const exampleMedicines3 = [
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 2 },
             { name: 'Pramipexole (Mirapexin) Prolonged Release 260µg base (375µg salt)', frequencyPerDay: 1 },
             { name: 'Stalevo (levodopa, carbidopa and entacapone) 175/43.75/200mg', frequencyPerDay: 3 },
-            { name: 'Opicapone', frequencyPerDay: 3 },
+            { name: 'Opicapone 50mg', frequencyPerDay: 3 },
         ];
 
 
@@ -43,8 +43,8 @@ describe('tests for calculateTotalLed fn', () => {
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 2 },
             { name: 'Pramipexole (Mirapexin) Prolonged Release 260µg base (375µg salt)', frequencyPerDay: 1 },
             { name: 'Stalevo (levodopa, carbidopa and entacapone) 175/43.75/200mg', frequencyPerDay: 3 },
-            { name: 'Tolcapone', frequencyPerDay: 3 },
-            { name: 'Entacapone', frequencyPerDay: 3 },
+            { name: 'Tolcapone 100mg', frequencyPerDay: 3 },
+            { name: 'Entacapone 200mg', frequencyPerDay: 3 },
         ];
 
         expect(calculateTotalLed(exampleMedicines)).toBe(1403.625);
