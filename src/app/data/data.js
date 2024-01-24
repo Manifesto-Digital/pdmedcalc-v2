@@ -52,7 +52,7 @@ export const medications = {
     'Rotigotine patch 12mg': { led: 360, isDa: true, isComt: false },
     'Rotigotine patch 14mg': { led: 420, isDa: true, isComt: false },
     'Rotigotine patch 16mg': { led: 480, isDa: true, isComt: false },
-    'Entacapone': { totalLedAdjustment: 0.33, isDa: false, isComt: true },
-    'Tolcapone': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
-    'Opicapone': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
+    'Entacapone 200mg': { totalLedAdjustment: 0.33, isDa: false, isComt: true },
+    'Tolcapone 100mg': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
+    'Opicapone 50mg': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
 }
