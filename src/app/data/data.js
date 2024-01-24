@@ -55,4 +55,9 @@ export const medications = {
     'Entacapone 200mg': { totalLedAdjustment: 0.33, isDa: false, isComt: true },
     'Tolcapone 100mg': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
     'Opicapone 50mg': { totalLedAdjustment: 0.5, isDa: false, isComt: true },
+    'Rasagiline 1mg': { led: 100, isDa: false, isComt: false },
+    'Selegiline 5mg': { led: 50, isDa: false, isComt: false },
+    'Selegiline 10mg': { led: 100, isDa: false, isComt: false },
+    'Safinamide 50mg': { led: 150, isDa: false, isComt: false },
+    'Safinamide 100mg': { led: 150, isDa: false, isComt: false },
 }
