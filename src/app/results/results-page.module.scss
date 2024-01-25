@@ -1,0 +1,21 @@
+@use "../styles/breakpoints";
+@use "../styles/colours";
+
+.heading,
+.text {
+    margin-top: 1rem;
+}
+
+.text {
+    @media (min-width: breakpoints.$large) {
+        max-width: 39.5rem;
+    }
+}
+
+.textFaded {
+    color: colours.$grey-3;
+}
+
+.bullets {
+    padding-left: 1rem;
+}
