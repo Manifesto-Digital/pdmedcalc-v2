@@ -127,6 +127,7 @@ export function calculateRotigotine(arrayOfMedicines) {
 
     const totalLedOfNonDopamineAgonists = calculateTotalLed(nonDopamineAgonists);
     const totalLedOfDopamineAgonists = calculateTotalLed(dopamineAgonists);
+    const overallTotalLed = totalLedOfDopamineAgonists + totalLedOfNonDopamineAgonists;
 
     const customRound = (num) => {
         const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
@@ -143,7 +144,7 @@ export function calculateRotigotine(arrayOfMedicines) {
     patchdose = patchdose % 2 === 0 ? patchdose : customRound(patchdose);
 
     if (patchdose > maxPatchdose) { patchdose = maxPatchdose; }
-    if (patchdose === 0) { patchdose = minPatchdose; }
+    if (patchdose === 0 && overallTotalLed !== 0) { patchdose = minPatchdose; }
 
     return patchdose;
 }
