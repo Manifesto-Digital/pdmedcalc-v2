@@ -264,3 +264,66 @@ This is calculated by:
 - calculating the total led for each time slot
 - calculating the difference in total leds between each time slot
 - returning the maximum difference in total led between the time slots
+
+
+## Tests ##
+
+### Testing strategy ###
+
+Given that this is a medical tool, the need for it to be accurate and reliable is obvious. 
+
+The following testing strategy has therefore been implemented:
+  1. manual/user acceptance testing by a clinician prior to go live
+  2. integration tests for the ```mainTransform``` function
+  3. unit tests for all the other functions that build up to the ```mainTransform``` function
+
+#### Manual/user acceptance testing ####
+
+To give confidence that the tool is correctly calculating the conversions for the various medicines, a trained medical professional has created example patients and calculated by hand what the correct dose output should be for each. These have then been compared against the results that the tool produces to make sure the two align.
+
+
+#### Integration testing ####
+
+Since the ```mainTransform``` function is ultimately responsible for taking the array of medicines entered on the calculator page as an argument and returning the output (conversion to dispersible madopar and transdermal rotigotine patch) which will be shown on the results page, this is the most important function to test.
+
+Proving its robustness also has the nice side effect of simultaneously proving that all the other functions which ```mainTransform``` relies on are themselves working correctly.
+
+##### Test cases #####
+
+There are 61 different medicines a user could potentially enter on the calculator page. For each medicine entered there are 10 possible frequencies they could select. If we think of a medicine/frequency pair as one "thing", then there are effectively 610 different "things" that could be entered.
+
+Combinatorics allows us to calculate the number of different possible combinaitions of these 610 "things".
+
+The combinations formula is:
+
+```js
+C(n,r) = n!/r!(n-r)!
+```
+
+where ```n``` is the total number of things you are choosing from, ```r``` is the number of things you are choosing and ```!``` is factorial.
+
+Suppose that a user enters 3 different "things".  ```610!/3!(610 - 3)!``` is the same as ```610 * 609 * 608 / 3!``` which equals 37,644,320.
+
+This illustrates the vast number of possibilities. And that's just with the user entering 3 different medicine/frequency pairs.
+
+It's obviously not feasible to write over 37 million integration tests so we need to reduce the number of "things" while retaining confidence in our tests and app. 
+
+The frequency only affects the overall conversion via the  ```calculateTotalLed``` function and so, given that this  function is itself unit tested, we don't have to consider the frequencies in the integration test cases thus reducing the number of "things" back down to a more manageable 61.
+
+Nevertheless, ```61!/3!(61 - 3)!``` is still quite big (35,990) and writing thirty-five thousand integration tests would also not be practical.
+
+We need to reduce the number of "things" further (while still maintaining confidence in our tests and app).
+
+The overall conversion treats medcines differently based on whether they are a dopamine agonist, a comt-inhibitor or neither. Therefore we in effect have just 3 "things" to create test cases for.
+
+- If a user enters just one medicine, there are three possibililities (```3!/1!(3 - 1)! = 3```) i.e. they entered a dopamine agonist or they entered a comt inhibitor, or they entered a medicine that is neither a dopamine agonist nor a comt inhibitor
+- If a user enters two medicines, there are three possibililities (```3!/2!(3 - 2)! = 3```) i.e. they entered a dopamine agonist and a comt inhibitor, or they entered a dopamine agonist and a medicine that is neither a dopamine agonist nor a comt inhibitor, or they entered a comt inhibitor and a medicine that is neither a dopamine agonist nor a comt inhibitor
+- If a user enters three medicines, there is just one possibility (```3!/3!(3 - 3)! = 1```) i.e. they entered a dopamine agonist, a comt inhibitor and a medicine that is neither a dopamine agonist nor a comt inhibitor
+
+Thus we can see that we only have to write 7 integration tests rather than tens of millions!
+
+These 7 tests are in ```src/app/tests/integration-tests/mainTransform.test.js```.
+
+#### Unit testing ####
+
+Each of the individual functions that feed into the ```mainTransform``` function are themselves unit tested. These unit tests can be found in ```src/app/tests/unit-tests```.
