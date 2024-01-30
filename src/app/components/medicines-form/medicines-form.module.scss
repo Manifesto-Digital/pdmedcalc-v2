@@ -94,6 +94,7 @@
         padding: 1rem;
         background-color: colours.$white;
         border: 1px solid colours.$grey-1;
+        align-items: center;
     }
 }
 
@@ -102,6 +103,10 @@
 .clear {
     padding: 0.5rem;
     border: 2px solid colours.$grey-4;
+
+    @media (min-width: breakpoints.$large) {
+        max-height: 2.6875rem;
+    }
 }
 
 .add {
