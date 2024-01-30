@@ -2,7 +2,7 @@ import { mainTransform } from "@/app/calculator/calculator-functions";
 
 describe('tests for the main transform function', () => {
 
-    test('Produces correct output when user enters just one medicine that is neither a comt inhibitor nor any dopamine agonists', () => {
+    test('Produces correct output when user enters just one medicine that is neither a comt inhibitor nor a dopamine agonist', () => {
 
         const exampleMedicines = [
             { name: 'Madopar (Co-beneldopa) 125mg (25/100mg)', frequencyPerDay: 4 },

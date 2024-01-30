@@ -13,8 +13,8 @@ export function DesktopVersion() {
         const add = (e) => {
             e.preventDefault();
 
-            const selectedMedicine = document.querySelector(`#med-input-${thisMedInput.id}`);
-            const selectedFrequency = document.querySelector(`#freq-for-med-input-${thisMedInput.id}`);
+            const selectedMedicine = document.querySelector(`#med-input-desktop-${thisMedInput.id}`);
+            const selectedFrequency = document.querySelector(`#freq-for-med-input-desktop-${thisMedInput.id}`);
             const medicineErrorMessage = document.querySelector(`#error-message-for-med-input-${thisMedInput.id}`);
             const frequencyErrorMessage = document.querySelector(`#freq-error-message-for-med-input-${thisMedInput.id}`);
 
@@ -84,7 +84,7 @@ export function DesktopVersion() {
             <div className={styles.selectsAndButtonsContainer}>
                 <div className={styles.selectAndErrorContainer}>
                     <p id={`error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select dose</p>
-                    <select id={`med-input-${thisMedInput.id}`} name="medicine" onChange={handleMedChange} aria-labelledby="medLabel" className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
+                    <select id={`med-input-desktop-${thisMedInput.id}`} name="medicine" onChange={handleMedChange} aria-labelledby="medLabel" className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
                         {thisMedInput.values.medicine && <option selected value={thisMedInput.values.medicine}>{thisMedInput.values.medicine}</option>}
                         {medicines.filter(med => med !== thisMedInput.values.medicine).map((med, index) => <option key={index} value={med}>{med}</option>)}
@@ -93,7 +93,7 @@ export function DesktopVersion() {
 
                 <div className={styles.selectAndErrorContainer}>
                     <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select frequency</p>
-                    <select id={`freq-for-med-input-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} aria-labelledby="freqLabel" className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
+                    <select id={`freq-for-med-input-desktop-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} aria-labelledby="freqLabel" className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
                         {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
                         {frequencies.filter(freq => freq != thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
@@ -101,7 +101,7 @@ export function DesktopVersion() {
                 </div>
 
                 <div className={styles.addAndRemoveButtonsContainer}>
-                    <button type='click' onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')}>Add</button>
+                    <button type='click' id={`add-btn-desktop-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')}>Add</button>
                     <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')}>Clear</button>
                     <button type='click' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')}>Remove</button>
                 </div>

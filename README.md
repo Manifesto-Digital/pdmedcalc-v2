@@ -55,7 +55,9 @@ Run ```npm run dev``` to start the development server and visit [http://localhos
 
 ### How to run the tests ###
 
-Run ```npm run test```
+Run ```npm run test``` to run the jest (unit and integration) tests
+
+Run ```npm run cypress:open``` to run the cypress (end-to-end) tests
 
 ### How to build the static application ###
 
@@ -275,7 +277,8 @@ Given that this is a medical tool, the need for it to be accurate and reliable i
 The following testing strategy has therefore been implemented:
   1. manual/user acceptance testing by a clinician prior to go live
   2. integration tests for the ```mainTransform``` function
-  3. unit tests for all the other functions that build up to the ```mainTransform``` function
+  3. end-to-end tests covering the full user journey from the home page to the results page
+  4. unit tests for all the other functions that build up to the ```mainTransform``` function
 
 #### Manual/user acceptance testing ####
 
@@ -323,6 +326,13 @@ The overall conversion treats medcines differently based on whether they are a d
 Thus we can see that we only have to write 7 integration tests rather than tens of millions!
 
 These 7 tests are in ```src/app/tests/integration-tests/mainTransform.test.js```.
+
+
+#### End to end testing ####
+
+Cypress is used to run end-to-end tests on the actual live site. It uses the same 7 test cases as the integration tests.
+
+These end-to-end tests are in ```cypress/e2e/home-calc-results-flow.cy.js```
 
 #### Unit testing ####
 
