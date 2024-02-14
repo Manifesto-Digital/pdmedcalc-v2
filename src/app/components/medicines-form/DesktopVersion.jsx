@@ -92,7 +92,7 @@ export function DesktopVersion() {
                 </div>
 
                 <div className={styles.selectAndErrorContainer}>
-                    <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select frequency</p>
+                    <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select number per 24 hours</p>
                     <select id={`freq-for-med-input-desktop-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} aria-labelledby="freqLabel" className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
                         {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
@@ -117,7 +117,7 @@ export function DesktopVersion() {
             <form action='/results'>
                 <div className={styles.formContainer}>
                     <h4 id="medLabel" className={styles.columnHeading + ' h5'}>Dose</h4>
-                    <h4 id="frequencyLabel" className={styles.columnHeading + ' h5'}>Frequency</h4>
+                    <h4 id="frequencyLabel" className={styles.columnHeading + ' h5'}>Number per 24 hours</h4>
                     <h4 className={styles.columnHeading + ' h5'}>Add/Remove</h4>
                     <div className={styles.medInputContainer}>
                         {medInputs.map((aMedInput) => <OneMedInput key={aMedInput.id} thisMedInput={aMedInput} allMedInputs={medInputs} setMedInputs={setMedInputs} />)}
