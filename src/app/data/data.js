@@ -9,6 +9,8 @@ export const medications = {
     'Sinemet (Co-careldopa) 250mg (50/200mg)': { led: 200, isDa: false, isComt: false },
     'Sinemet (Co-careldopa) CR 50/200mg': { led: 150, isDa: false, isComt: false },
     'Half Sinemet (Co-careldopa) CR 25/100mg': { led: 75, isDa: false, isComt: false },
+    'Madopar (Co-beneldopa) dispersible 62.5mg (12.5/50mg)': { led: 50, isDa: false, isComt: false },
+    'Madopar (Co-beneldopa) dispersible 125mg (25/100mg)': { led: 100, isDa: false, isComt: false },
     'Stalevo (levodopa, carbidopa and entacapone) 50/12.5/200mg': { led: 66.75, isDa: false, isComt: false },
     'Stalevo (levodopa, carbidopa and entacapone) 75/18.75/200mg': { led: 99.75, isDa: false, isComt: false },
     'Stalevo (levodopa, carbidopa and entacapone) 100/25/200mg': { led: 133, isDa: false, isComt: false },
