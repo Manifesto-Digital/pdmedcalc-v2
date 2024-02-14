@@ -93,8 +93,8 @@ export function MobileVersion() {
                     </select>
                 </label>
                 <label className={styles.label}>
-                    <p className='h5'>Frequency</p>
-                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="frequency">Select frequency</p>
+                    <p className='h5'>Number per 24 hours</p>
+                    <p className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'} data-error="frequency">Select number per 24 hours</p>
                     <select id={`freq-for-med-input-${thisMedInput.id}`} name="frequency" className={(thisMedInput.values.frequency ? styles.none : '') + ' p ' + styles.select} onChange={handleFreqChange}>
                         <option value="">Select</option>
                         {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
