@@ -13,7 +13,7 @@ export default function Explainer() {
                 <li className={styles.sentence + " p"}>The LED is then used to calculate the dose of dispersible madopar to be given via a nasogastric tube to provide a patient with their usual amount of PD medication.</li>
                 <li className={styles.sentence + " p"}>The tool also provides a conversion to a rotigotine patch dose, as an alternative to nasogastric dispersible madopar. A correction factor is applied to avoid large rotigotine patch doses, as these may cause side effects such as confusion, hallucinations or delirium.</li>
                 <li className={styles.sentence + " p"}>Amantadine can be safely omitted if swallow is compromised.</li>
-                <li className={styles.sentence + " p"}>If the patient is on an Apomorphine infusion or uses Duodopa (via PEJ), then they do not need to be converted to a rotigotine patch – instead, please continue to use their existing non-oral treatment.</li>
+                <li className={styles.sentence + " p"}>If the patient is on a subcutaneous Apomorphine infusion, Duodopa (via PEJ) or a subcutaneous ProDuodopa infusion (foslevodopa/foscarbidopa) no conversion is required - please continue to use their existing non-oral treatment.</li>
             </ul >
             <h2 className={styles.subheading + ' h3'}>Where did this tool come from?</h2>
             <ul className={styles.bullets}>
