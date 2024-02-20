@@ -3,7 +3,7 @@ import styles from './explainer.module.scss'
 export default function Explainer() {
     return (
         <>
-            <h1 className={styles.heading + ' h2'}>PD 'Nil by Mouth' Medication Dose Calculator</h1>
+            <h1 className={styles.heading + ' h2'}>PDMedCalc</h1>
             <h2 className={styles.subheading + ' h3'}>Who is this tool for?</h2>
             <p className={styles.sentence}>Doctors, nurses and pharmacists who are looking after patients with Parkinson’s Disease (PD) who have been admitted to hospital and are unable to take their medications orally.</p>
             <h2 className={styles.subheading + ' h3'}>What is the purpose of the tool?</h2>
@@ -18,7 +18,7 @@ export default function Explainer() {
             <h2 className={styles.subheading + ' h3'}>Where did this tool come from?</h2>
             <ul className={styles.bullets}>
                 <li className={styles.sentence}><p>The development of the tool was led by James Fisher and the Northumbria Healthcare NHS Foundation Trust Parkinson’s Disease team in 2014, who worked in collaboration with Daniel Jamieson (Computing Science PhD student at Newcastle University).</p></li>
-                <li className={styles.sentence}><p>The tool was redeveloped in 2024 with support from TPXimpact and Parkinson’s UK.</p></li>
+                <li className={styles.sentence}><p>The tool was redeveloped in 2024 with support from TPXimpact and funding from Parkinson’s UK. PDMedCalc was registered with the UK Medicines & Healthcare products Regulatory Agency (MHRA) as a Class I medical device on 15/02/24. If you have any questions or problems related to PDMedCalc, please contact us using the email link at the foot of this page.</p></li>
             </ul>
 
         </>
