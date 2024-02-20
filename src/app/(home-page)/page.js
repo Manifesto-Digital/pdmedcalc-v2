@@ -1,6 +1,7 @@
 import styles from './home-page.module.scss';
 import Explainer from '../components/explainer/Explainer';
 import TextBox from '../components/text-box/TextBox';
+import UkcaMark from '../components/ukca-mark/UkcaMark';
 import BackToTop from '../components/back-to-top/BackToTop';
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function Home() {
     <main id="main-content" className={styles.homePageContainer}>
       <Explainer />
       <TextBox />
+      <UkcaMark />
       <BackToTop />
     </main>
   )
