@@ -14,7 +14,7 @@ export const metadata = {
     description: "A tool to convert Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar.",
     url: 'https://pdmedcalc-v2.pages.dev/',
     siteName: 'PDMedCalc',
-    images: [{ url: 'https://pdmedcalc-v2.pages.dev/og.svg' }],
+    images: [{ url: 'https://pdmedcalc-v2.pages.dev/og.png' }],
     locale: 'en_GB',
     type: 'website',
   },
@@ -23,7 +23,7 @@ export const metadata = {
     title: 'PDMedCalc',
     description: "A tool to convert Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar.",
     url: 'https://pdmedcalc-v2.pages.dev/',
-    images: ['https://pdmedcalc-v2.pages.dev/og.svg'],
+    images: ['https://pdmedcalc-v2.pages.dev/og.png'],
   },
 }
 export default function RootLayout({ children }) {
