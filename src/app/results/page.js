@@ -36,7 +36,7 @@ export default function Results() {
                 the total levodopa equivalent dose for this patient is <span className='h6'>{calculateTotalLed(medicineObjects)} mg per day.</span>
             </p>
             {calculateTotalLed(medicineObjects) > 3000 ?
-                <p className={styles.text + ' p'}>This is a very large levodopa equivalent dose. Please recheck the patient’s medications.
+                <p className={styles.text + ' p ' + styles.warning}>This is a very large levodopa equivalent dose. Please recheck the patient’s medications.
                     Please then go back to the medication entry page and re-enter their medications.
                 </p> : ''
             }
