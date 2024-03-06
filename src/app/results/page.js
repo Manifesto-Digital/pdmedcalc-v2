@@ -35,6 +35,11 @@ export default function Results() {
             <p className={styles.text + ' p'}>
                 the total levodopa equivalent dose for this patient is <span className='h6'>{calculateTotalLed(medicineObjects)} mg per day.</span>
             </p>
+            {calculateTotalLed(medicineObjects) > 3000 ?
+                <p className={styles.text + ' p'}>This is a very large levodopa equivalent dose. Please recheck the patient’s medications.
+                    Please then go back to the medication entry page and re-enter their medications.
+                </p> : ''
+            }
             <p className={styles.text + ' p'}>
                 The equivalent dose of levodopa for this patient can be provided in 2 different ways;
                 below is a brief explanation of each option and the accompanying suggested prescription.
