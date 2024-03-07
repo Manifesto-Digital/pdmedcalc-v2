@@ -103,9 +103,14 @@ export function MobileVersion() {
                 </label>
                 <p className='h5'>Add/Remove</p>
                 <div className={styles.addAndRemoveButtonsContainer}>
-                    <button type='click' id={`add-btn-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')}>Add</button>
-                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')}>Clear</button>
-                    <button type='click' onClick={removeMedInput} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')}>Remove</button>
+                    <p className='sr-only' id={`add-btn-mobile-description-${thisMedInput.id}`}>Include this medicine in the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <button type='click' id={`add-btn-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`add-btn-mobile-description-${thisMedInput.id}`}>Add</button>
+
+                    <p className='sr-only' id={`clear-btn-mobile-description-${thisMedInput.id}`}>Reset this medicine.</p>
+                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`clear-btn-mobile-description-${thisMedInput.id}`}>Clear</button>
+
+                    <p className='sr-only' id={`remove-btn-mobile-description-${thisMedInput.id}`}>Remove this medicine from the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <button type='click' onClick={removeMedInput} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')} aria-describedby={`remove-btn-mobile-description-${thisMedInput.id}`}>Remove</button>
                 </div>
             </div>
         )
@@ -117,7 +122,9 @@ export function MobileVersion() {
     return (
         <form action='/results' className={styles.mobileOnly}>
             {medInputs.map((aMedInput) => <OneMedInput key={aMedInput.id} thisMedInput={aMedInput} allMedInputs={medInputs} setMedInputs={setMedInputs} />)}
-            <button type='submit' className={styles.button}>Calculate</button>
+
+            <p className='sr-only' id='calculate-btn-mobile-description'>Calculate the total levodopa equivalent dose of the added medicines and convert them to dispersible madopar and rotigotine patch.</p>
+            <button type='submit' className={styles.button} aria-describedby='calculate-btn-mobile-description'>Calculate</button>
         </form>
     )
 }
