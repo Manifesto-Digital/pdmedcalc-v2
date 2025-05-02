@@ -49,4 +49,23 @@ describe('tests for calculateTotalLed fn', () => {
 
         expect(calculateTotalLed(exampleMedicines)).toBe(1403.625);
     })
+
+    test('Sinemet 1 per day + Opicapone 1 per day === 150 ', () => {
+        const exampleMedicines = [
+            { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 1 },
+            { name: 'Opicapone 50mg', frequencyPerDay: 1 },
+        ];
+
+        expect(calculateTotalLed(exampleMedicines)).toBe(150);
+    })
+
+    test('Sinemet 125mg 1/day + Ropinirole 10mg 1/day + Opicapone 50mg 1/day === 350 ', () => {
+        const exampleMedicines = [
+            { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 1 },
+            { name: 'Ropinirole (Requip XL) 10mg', frequencyPerDay: 1 },
+            { name: 'Opicapone 50mg', frequencyPerDay: 1 },
+        ];
+
+        expect(calculateTotalLed(exampleMedicines)).toBe(350);
+    })
 })
