@@ -22,7 +22,7 @@ export const medications = {
     'Ropinirole (Requip XL) 4mg': { led: 80, isDa: true, isComt: false },
     'Ropinirole (Requip XL) 6mg': { led: 120, isDa: true, isComt: false },
     'Ropinirole (Requip XL) 8mg': { led: 160, isDa: true, isComt: false },
-    'Ropinirole (Requip XL) 10mg': { led: 200, isDa: true, isComt: false },
+    'Ropinirole (Requip XL) 10mg': { led: 200, isDa: false, isComt: false },
     'Ropinirole (Requip XL) 12mg': { led: 240, isDa: true, isComt: false },
     'Ropinirole (Requip XL) 14mg': { led: 280, isDa: true, isComt: false },
     'Ropinirole (Requip XL) 16mg': { led: 320, isDa: true, isComt: false },
