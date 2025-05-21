@@ -12,9 +12,24 @@ export function calculateTotalLed(arrayOfMedicines) {
         .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
         .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
     /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment*/
+
     const theComtInhibitor = comtInhibitors[0];
 
-    return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
+    const ledOfLevodopaMedicines = arrayOfMedicines
+        .filter((aMedicineObj) => medications[aMedicineObj.name].hasLevodopa)
+        .reduce((totalLED, currentMedicineObj) => {
+            return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
+        }, 0);
+
+    const ledOfComtInhibitor = ledOfLevodopaMedicines * medications[theComtInhibitor.name].totalLedAdjustment;
+
+    const ledOfNonLevodopaMedicines = arrayOfMedicines
+        .filter((aMedicineObj) => !medications[aMedicineObj.name].hasLevodopa && !medications[aMedicineObj.name].isComt)
+        .reduce((totalLED, currentMedicineObj) => {
+            return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
+    }, 0);
+    
+    return ledOfComtInhibitor + ledOfLevodopaMedicines + ledOfNonLevodopaMedicines;
 }
 
 export function calculateMaxSpread(timeMadoparObj) {
