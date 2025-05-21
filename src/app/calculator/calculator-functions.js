@@ -1,34 +1,63 @@
 import { medications } from "../data/data";
 
+/**
+ * Calculates the total LED (Levodopa Equivalent Dose) of a list of medicines.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns boolean
+ */
 export function calculateTotalLed(arrayOfMedicines) {
+    const hasAComtInhibitor = arrayOfMedicines.some((aMedicineObj) => medications[aMedicineObj.name].isComt);
+    return hasAComtInhibitor ? calculateTotalLedWithComtInhibitor(arrayOfMedicines) : calculateTotalLedWithoutComtInhibitor(arrayOfMedicines);
+}
+
+/**
+ * Calculates the total LED of a list of medicines, which do not contain a COMT inhibitor.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns 
+ */
+export function calculateTotalLedWithoutComtInhibitor(arrayOfMedicines) {
     const nonComtInhibitors = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isComt);
     const totalLedFromNonComtInhibitors = nonComtInhibitors.reduce((totalLED, currentMedicineObj) => {
         return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led);
     }, 0);
 
-    if (nonComtInhibitors.length === arrayOfMedicines.length) { return totalLedFromNonComtInhibitors; }
+    return totalLedFromNonComtInhibitors;
+}
 
+/**
+ * Calculates the total LED of a list of medicines, taking into account the effect of COMT inhibitors.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns 
+ */
+export function calculateTotalLedWithComtInhibitor(arrayOfMedicines) {
     const comtInhibitors = arrayOfMedicines
         .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
         .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
-    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment*/
 
+    // Since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment.
     const theComtInhibitor = comtInhibitors[0];
 
+    // First, the LED of levodopa-containing medications is calculated.
     const ledOfLevodopaMedicines = arrayOfMedicines
         .filter((aMedicineObj) => medications[aMedicineObj.name].hasLevodopa)
         .reduce((totalLED, currentMedicineObj) => {
             return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
         }, 0);
 
+    // Second, this LED of levodopa-containing medications is multiplied by 0.33 (entacapone) or 0.5 (tolcapone or opicapone) to give the LED of the COMT inhibitor.
     const ledOfComtInhibitor = ledOfLevodopaMedicines * medications[theComtInhibitor.name].totalLedAdjustment;
 
+    // Third, the subtotal LED of dopamine agonists, MAO-B inhibitors, and other antiparkinsonian medications is calculated (those that are not COMT inhibitors or levodopa-containing medications).
     const ledOfNonLevodopaMedicines = arrayOfMedicines
         .filter((aMedicineObj) => !medications[aMedicineObj.name].hasLevodopa && !medications[aMedicineObj.name].isComt)
         .reduce((totalLED, currentMedicineObj) => {
             return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
     }, 0);
     
+    // Finally, the total LED is calculated by adding the LED of the COMT inhibitor, the LED of levodopa-containing medications, and the subtotal LED of other medications.
     return ledOfComtInhibitor + ledOfLevodopaMedicines + ledOfNonLevodopaMedicines;
 }
 
