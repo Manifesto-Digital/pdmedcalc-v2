@@ -135,6 +135,7 @@ type Medications = {
     led: number
     isDa: boolean
     isComt: boolean
+    hasLevodopa: boolean
   }
 } 
 ```
@@ -146,6 +147,8 @@ Each property of the ```medications``` object is a string representing the name 
 ```isDa``` represents whether or not this medicine is a dopamine agonist.
 
 ```isComt``` represents whether or not this medicine is a comt inhibitor.
+
+```hasLevodopa``` determines if a mediciene contains Levodopa. Levodopa mediciens are affected by the presense of a comt inhibitor.
 
 #### Functions ####
 
