@@ -159,6 +159,19 @@ export function calculateMadopar(targetLED) {
     return bestDistribution;
 }
 
+/**
+ * This function rounds the number to the nearest multiple of 2, with a custom rule for rounding.
+ * If the number is closer to the lower multiple of 2, it rounds down;
+ * if it is closer to the upper multiple of 2, it rounds up.
+ * @param {*} num - the number to be rounded
+ * @returns int - the rounded number to the nearest multiple of 2
+ */
+function roundToNearestTwo(num) {
+    const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
+    const nearestMultipleOf2Above = nearestMultipleOf2Below + 2;
+    const thresholdForRoundingUp = nearestMultipleOf2Below + 1;
+    return num < thresholdForRoundingUp ? nearestMultipleOf2Below : nearestMultipleOf2Above;
+}
 
 export function calculateRotigotine(arrayOfMedicines) {
     const correctionFactor = 0.25;
@@ -173,19 +186,11 @@ export function calculateRotigotine(arrayOfMedicines) {
     const totalLedOfDopamineAgonists = calculateTotalLed(dopamineAgonists);
     const overallTotalLed = totalLedOfDopamineAgonists + totalLedOfNonDopamineAgonists;
 
-    const customRound = (num) => {
-        const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
-        const nearestMultipleOf2Above = Math.ceil(num / 2) * 2;
-        const thresholdForRoundingUp = nearestMultipleOf2Below + 1.5;
-
-        return num < thresholdForRoundingUp ? nearestMultipleOf2Below : nearestMultipleOf2Above;
-    }
-
     const patchdoseForNonDopamineAgonists = (totalLedOfNonDopamineAgonists * correctionFactor) / adjustment;
     const patchdoseForDopamineAgonists = totalLedOfDopamineAgonists / adjustment;
 
     let patchdose = patchdoseForDopamineAgonists + patchdoseForNonDopamineAgonists;
-    patchdose = patchdose % 2 === 0 ? patchdose : customRound(patchdose);
+    patchdose = patchdose % 2 === 0 ? patchdose : roundToNearestTwo(patchdose);
 
     if (patchdose > maxPatchdose) { patchdose = maxPatchdose; }
     if (patchdose === 0 && overallTotalLed !== 0) { patchdose = minPatchdose; }

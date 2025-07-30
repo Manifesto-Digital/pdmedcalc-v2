@@ -66,7 +66,7 @@ Note that, in practice, patients would only ever be on one COMT inhibitor, we wo
 - Comes in 2mg increment doses
 - It’s not recommended to cut the patch in half, so doses of 3mg for example, are a no-go
 - The maximum dose is 16mg
-- The total dose calculated therefore needs to be either rounded up or down to a multiple of 2mg. If the result is within 0.5mg of the upper bound (e.g. 3.6mg), round up. Otherwise, round down then round (e.g 3.4mg would be rounded down to 2mg).
+- The total dose calculated therefore needs to be either rounded up or down to a multiple of 2mg.
 - Between the 2014 calculator and the 2024 calculator, there has been a change in levodopa equivalence for rotigotine. In 2014, 1mg of rotigotine equated to 20mg of levodopa. Based on the latest data, 1mg of rotigotine equates to 30mg of levodopa.
 
 
