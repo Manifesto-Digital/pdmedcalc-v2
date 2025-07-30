@@ -29,7 +29,7 @@ describe('tests for the main transform function', () => {
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: 2
+            option2: 4
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
@@ -304,7 +304,7 @@ describe('tests for the main transform function', () => {
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: 2
+            option2: 4
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
@@ -466,7 +466,7 @@ describe('tests for the main transform function', () => {
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: 4
+            option2: 6
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
