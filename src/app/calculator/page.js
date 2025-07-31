@@ -10,8 +10,8 @@ export default function Calculator() {
     return (
         <main id="main-content" data-page="calculator">
             <Back href='/' text='Back' />
-            <h2 className={styles.heading}>Dose Calculator</h2>
-            <h3 className={styles.subheading}>Enter each medication and the frequency (per day)</h3>
+            <h1 className={styles.heading + ' h2'}>Dose Calculator</h1>
+            <h2 className={styles.subheading + ' h3'}>Enter each medication and the frequency (per day)</h2>
             <MedicinesForm />
             <div className={styles.mobileOnly}>
                 <BackToTop />

@@ -13,8 +13,8 @@ export function DesktopVersion() {
         const add = (e) => {
             e.preventDefault();
 
-            const selectedMedicine = document.querySelector(`#med-input-${thisMedInput.id}`);
-            const selectedFrequency = document.querySelector(`#freq-for-med-input-${thisMedInput.id}`);
+            const selectedMedicine = document.querySelector(`#med-input-desktop-${thisMedInput.id}`);
+            const selectedFrequency = document.querySelector(`#freq-for-med-input-desktop-${thisMedInput.id}`);
             const medicineErrorMessage = document.querySelector(`#error-message-for-med-input-${thisMedInput.id}`);
             const frequencyErrorMessage = document.querySelector(`#freq-error-message-for-med-input-${thisMedInput.id}`);
 
@@ -84,16 +84,19 @@ export function DesktopVersion() {
             <div className={styles.selectsAndButtonsContainer}>
                 <div className={styles.selectAndErrorContainer}>
                     <p id={`error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select dose</p>
-                    <select id={`med-input-${thisMedInput.id}`} name="medicine" onChange={handleMedChange} aria-labelledby="medLabel" className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
+                    <label for={`med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the medicine that the patient is on.</label>
+                    <select id={`med-input-desktop-${thisMedInput.id}`} name="medicine" onChange={handleMedChange} className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
                         {thisMedInput.values.medicine && <option selected value={thisMedInput.values.medicine}>{thisMedInput.values.medicine}</option>}
                         {medicines.filter(med => med !== thisMedInput.values.medicine).map((med, index) => <option key={index} value={med}>{med}</option>)}
                     </select>
+
                 </div>
 
                 <div className={styles.selectAndErrorContainer}>
-                    <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select frequency</p>
-                    <select id={`freq-for-med-input-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} aria-labelledby="freqLabel" className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
+                    <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select number per 24 hours</p>
+                    <label for={`freq-for-med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the number of times per day that the patient takes this medicine.</label>
+                    <select id={`freq-for-med-input-desktop-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
                         {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
                         {frequencies.filter(freq => freq != thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
@@ -101,9 +104,14 @@ export function DesktopVersion() {
                 </div>
 
                 <div className={styles.addAndRemoveButtonsContainer}>
-                    <button type='click' onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')}>Add</button>
-                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')}>Clear</button>
-                    <button type='click' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')}>Remove</button>
+                    <p className='sr-only' id={`add-btn-desktop-description-${thisMedInput.id}`}>Include this medicine in the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <button type='click' id={`add-btn-desktop-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`add-btn-desktop-description-${thisMedInput.id}`}>Add</button>
+
+                    <p className='sr-only' id={`clear-btn-desktop-description-${thisMedInput.id}`}>Reset this medicine.</p>
+                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`clear-btn-desktop-description-${thisMedInput.id}`}>Clear</button>
+
+                    <p className='sr-only' id={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove this medicine from the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <button type='click' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')} aria-describedby={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove</button>
                 </div>
 
             </div>
@@ -116,14 +124,16 @@ export function DesktopVersion() {
         <div className={styles.desktopOnly}>
             <form action='/results'>
                 <div className={styles.formContainer}>
-                    <h4 id="medLabel" className={styles.columnHeading + ' h5'}>Dose</h4>
-                    <h4 id="frequencyLabel" className={styles.columnHeading + ' h5'}>Frequency</h4>
-                    <h4 className={styles.columnHeading + ' h5'}>Add/Remove</h4>
+                    <h3 className={styles.columnHeading + ' h5'}>Dose</h3>
+                    <h3 className={styles.columnHeading + ' h5'}>Number per 24 hours</h3>
+                    <h3 className={styles.columnHeading + ' h5'}>Add/Remove</h3>
                     <div className={styles.medInputContainer}>
                         {medInputs.map((aMedInput) => <OneMedInput key={aMedInput.id} thisMedInput={aMedInput} allMedInputs={medInputs} setMedInputs={setMedInputs} />)}
                     </div>
                 </div>
-                <button type='submit' className={styles.button}>Calculate</button>
+
+                <p className='sr-only' id='calculate-btn-desktop-description'>Calculate the total levodopa equivalent dose of the added medicines and convert them to dispersible madopar and rotigotine patch.</p>
+                <button type='submit' className={styles.button} aria-describedby='calculate-btn-desktop-description'>Calculate</button>
             </form >
         </div>
     )

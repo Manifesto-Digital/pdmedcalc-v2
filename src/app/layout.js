@@ -4,11 +4,27 @@ import GlobalFooter from './components/global-footer/GlobalFooter'
 
 export const metadata = {
   title: {
-    template: '%s | PDMedcalc',
-    default: 'PDMedcalc',
+    template: '%s | PDMedCalc',
+    default: 'PDMedCalc',
   },
   author: 'James Fisher',
-  description: "PD Medcalc is a tool that converts a patient's usual Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar and rotigotine patch.",
+  description: "A tool to convert Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar.",
+  openGraph: {
+    title: 'PDMedCalc',
+    description: "A tool to convert Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar.",
+    url: 'https://pdmedcalc-v2.pages.dev/',
+    siteName: 'PDMedCalc',
+    images: [{ url: 'https://pdmedcalc-v2.pages.dev/og.png' }],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PDMedCalc',
+    description: "A tool to convert Parkinson's Disease medications to a 'Levodopa equivalent dose' of dispersible madopar.",
+    url: 'https://pdmedcalc-v2.pages.dev/',
+    images: ['https://pdmedcalc-v2.pages.dev/og.png'],
+  },
 }
 export default function RootLayout({ children }) {
   const cfToken = "{'token': '400b8009b1ae4619ae2ff2e5cd84d109'}";

@@ -28,13 +28,18 @@ export default function Results() {
 
     return (
         <main id="main-content">
-            <Back href='/calculator' text='Back to calulator' />
+            <Back href='/calculator' text='Back to calculator' />
             <h1 className={styles.heading + ' h2'}>Your Results</h1>
             <p className={styles.text + ' p'}>Based on the entry of the following medications:</p>
             <EnteredMedicines medicineObjects={medicineObjects} />
             <p className={styles.text + ' p'}>
                 the total levodopa equivalent dose for this patient is <span className='h6'>{calculateTotalLed(medicineObjects)} mg per day.</span>
             </p>
+            {calculateTotalLed(medicineObjects) > 3000 ?
+                <p className={styles.text + ' p ' + styles.warning}>This is a very large levodopa equivalent dose. Please recheck the patient’s medications.
+                    Please then go back to the medication entry page and re-enter their medications.
+                </p> : ''
+            }
             <p className={styles.text + ' p'}>
                 The equivalent dose of levodopa for this patient can be provided in 2 different ways;
                 below is a brief explanation of each option and the accompanying suggested prescription.
@@ -65,15 +70,16 @@ export default function Results() {
                     delivery of the above to their pre-existing timings.
                 </li>
                 <li className={styles.text + ' p'}>
-                    If a patient usually takes their PD medications more frequently than four times a day,
-                    then adjust the delivery of the above prescription to their pre-existing frequency.
+                    If a patient usually takes their PD medications more frequently than four times a day, then divide
+                    the total daily dose of madopar to align with their pre-existing frequency.
                 </li>
                 <li className={styles.text + ' p'}>
                     Please follow local trust protocols regarding insertion and management of naso-gastric tubes.
+                    Please be mindful that inserting and confirming safe placement of an NG tube takes time and that
+                    delays in medicines administration for people with PD can be harmful.
                 </li>
                 <li className={styles.text + ' p'}>
-                    Subcutaneous apomorphine should NOT be commenced without specialist input
-                    from the PD team.
+                    Subcutaneous apomorphine should not be commenced without specialist input from the PD team.
                 </li>
             </ul>
             <ReferencesAccordion />
