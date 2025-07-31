@@ -161,16 +161,26 @@ export function calculateMadopar(targetLED) {
 
 /**
  * This function rounds the number to the nearest multiple of 2, with a custom rule for rounding.
- * If the number is closer to the lower multiple of 2, it rounds down;
- * if it is closer to the upper multiple of 2, it rounds up.
+ * If the calculated patch dose is exactly on an odd integer (e.g., 5.0, 7.0, 9.0), round down.
+ * If the calculated patch dose is above an odd integer (e.g., 5.01+), round up.
  * @param {*} num - the number to be rounded
  * @returns int - the rounded number to the nearest multiple of 2
  */
 function roundToNearestTwo(num) {
     const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
     const nearestMultipleOf2Above = nearestMultipleOf2Below + 2;
-    const thresholdForRoundingUp = nearestMultipleOf2Below + 1;
-    return num < thresholdForRoundingUp ? nearestMultipleOf2Below : nearestMultipleOf2Above;
+    
+    // Check if the number is exactly on an odd integer (which would be between even multiples)
+    const isExactlyOnOddInteger = Math.abs(num % 1) < 0.0001 && (Math.floor(num) % 2 === 1);
+    
+    if (isExactlyOnOddInteger) {
+        // If exactly on odd integer (like 5.0, 7.0), round down to lower even multiple
+        return nearestMultipleOf2Below;
+    } else {
+        // Standard rounding: round to nearest even multiple
+        const midpoint = nearestMultipleOf2Below + 1;
+        return num < midpoint ? nearestMultipleOf2Below : nearestMultipleOf2Above;
+    }
 }
 
 export function calculateRotigotine(arrayOfMedicines) {
