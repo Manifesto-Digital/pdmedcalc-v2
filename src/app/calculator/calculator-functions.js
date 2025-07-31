@@ -1,20 +1,64 @@
 import { medications } from "../data/data";
 
+/**
+ * Calculates the total LED (Levodopa Equivalent Dose) of a list of medicines.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns boolean
+ */
 export function calculateTotalLed(arrayOfMedicines) {
+    const hasAComtInhibitor = arrayOfMedicines.some((aMedicineObj) => medications[aMedicineObj.name].isComt);
+    return hasAComtInhibitor ? calculateTotalLedWithComtInhibitor(arrayOfMedicines) : calculateTotalLedWithoutComtInhibitor(arrayOfMedicines);
+}
+
+/**
+ * Calculates the total LED of a list of medicines, which do not contain a COMT inhibitor.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns 
+ */
+export function calculateTotalLedWithoutComtInhibitor(arrayOfMedicines) {
     const nonComtInhibitors = arrayOfMedicines.filter((aMedicineObj) => !medications[aMedicineObj.name].isComt);
     const totalLedFromNonComtInhibitors = nonComtInhibitors.reduce((totalLED, currentMedicineObj) => {
         return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led);
     }, 0);
 
-    if (nonComtInhibitors.length === arrayOfMedicines.length) { return totalLedFromNonComtInhibitors; }
+    return totalLedFromNonComtInhibitors;
+}
 
+/**
+ * Calculates the total LED of a list of medicines, taking into account the effect of COMT inhibitors.
+ * 
+ * @param {*} arrayOfMedicines 
+ * @returns 
+ */
+export function calculateTotalLedWithComtInhibitor(arrayOfMedicines) {
     const comtInhibitors = arrayOfMedicines
         .filter((aMedicineObj) => medications[aMedicineObj.name].isComt)
         .sort((a, b) => medications[b.name].totalLedAdjustment - medications[a.name].totalLedAdjustment);
-    /* since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment*/
+
+    // Since patients should only ever really be on one comt inhibitor we should take the one with the highest totalLedAdjustment.
     const theComtInhibitor = comtInhibitors[0];
 
-    return totalLedFromNonComtInhibitors + (totalLedFromNonComtInhibitors * medications[theComtInhibitor.name].totalLedAdjustment);
+    // First, the LED of levodopa-containing medications is calculated.
+    const ledOfLevodopaMedicines = arrayOfMedicines
+        .filter((aMedicineObj) => medications[aMedicineObj.name].hasLevodopa)
+        .reduce((totalLED, currentMedicineObj) => {
+            return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
+        }, 0);
+
+    // Second, this LED of levodopa-containing medications is multiplied by 0.33 (entacapone) or 0.5 (tolcapone or opicapone) to give the LED of the COMT inhibitor.
+    const ledOfComtInhibitor = ledOfLevodopaMedicines * medications[theComtInhibitor.name].totalLedAdjustment;
+
+    // Third, the subtotal LED of dopamine agonists, MAO-B inhibitors, and other antiparkinsonian medications is calculated (those that are not COMT inhibitors or levodopa-containing medications).
+    const ledOfNonLevodopaMedicines = arrayOfMedicines
+        .filter((aMedicineObj) => !medications[aMedicineObj.name].hasLevodopa && !medications[aMedicineObj.name].isComt)
+        .reduce((totalLED, currentMedicineObj) => {
+            return totalLED + (currentMedicineObj.frequencyPerDay * medications[currentMedicineObj.name].led)
+    }, 0);
+    
+    // Finally, the total LED is calculated by adding the LED of the COMT inhibitor, the LED of levodopa-containing medications, and the subtotal LED of other medications.
+    return ledOfComtInhibitor + ledOfLevodopaMedicines + ledOfNonLevodopaMedicines;
 }
 
 export function calculateMaxSpread(timeMadoparObj) {
@@ -115,6 +159,29 @@ export function calculateMadopar(targetLED) {
     return bestDistribution;
 }
 
+/**
+ * This function rounds the number to the nearest multiple of 2, with a custom rule for rounding.
+ * If the calculated patch dose is exactly on an odd integer (e.g., 5.0, 7.0, 9.0), round down.
+ * If the calculated patch dose is above an odd integer (e.g., 5.01+), round up.
+ * @param {*} num - the number to be rounded
+ * @returns int - the rounded number to the nearest multiple of 2
+ */
+function roundToNearestTwo(num) {
+    const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
+    const nearestMultipleOf2Above = nearestMultipleOf2Below + 2;
+    
+    // Check if the number is exactly on an odd integer (which would be between even multiples)
+    const isExactlyOnOddInteger = Math.abs(num % 1) < 0.0001 && (Math.floor(num) % 2 === 1);
+    
+    if (isExactlyOnOddInteger) {
+        // If exactly on odd integer (like 5.0, 7.0), round down to lower even multiple
+        return nearestMultipleOf2Below;
+    } else {
+        // Standard rounding: round to nearest even multiple
+        const midpoint = nearestMultipleOf2Below + 1;
+        return num < midpoint ? nearestMultipleOf2Below : nearestMultipleOf2Above;
+    }
+}
 
 export function calculateRotigotine(arrayOfMedicines) {
     const correctionFactor = 0.25;
@@ -129,19 +196,11 @@ export function calculateRotigotine(arrayOfMedicines) {
     const totalLedOfDopamineAgonists = calculateTotalLed(dopamineAgonists);
     const overallTotalLed = totalLedOfDopamineAgonists + totalLedOfNonDopamineAgonists;
 
-    const customRound = (num) => {
-        const nearestMultipleOf2Below = Math.floor(num / 2) * 2;
-        const nearestMultipleOf2Above = Math.ceil(num / 2) * 2;
-        const thresholdForRoundingUp = nearestMultipleOf2Below + 1.5;
-
-        return num < thresholdForRoundingUp ? nearestMultipleOf2Below : nearestMultipleOf2Above;
-    }
-
     const patchdoseForNonDopamineAgonists = (totalLedOfNonDopamineAgonists * correctionFactor) / adjustment;
     const patchdoseForDopamineAgonists = totalLedOfDopamineAgonists / adjustment;
 
     let patchdose = patchdoseForDopamineAgonists + patchdoseForNonDopamineAgonists;
-    patchdose = patchdose % 2 === 0 ? patchdose : customRound(patchdose);
+    patchdose = patchdose % 2 === 0 ? patchdose : roundToNearestTwo(patchdose);
 
     if (patchdose > maxPatchdose) { patchdose = maxPatchdose; }
     if (patchdose === 0 && overallTotalLed !== 0) { patchdose = minPatchdose; }

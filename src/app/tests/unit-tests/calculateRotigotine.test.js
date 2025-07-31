@@ -16,10 +16,10 @@ describe('tests for calculateRotigotine fn', () => {
 
     test('works if recommended patchdose is within patchdose range and rounding is required', () => {
         const exampleMedicines = [
-            { name: 'Sinemet (Co-careldopa) 250mg (50/200mg)', frequencyPerDay: 3 },
+            { name: 'Sinemet (Co-careldopa) 250mg (25/250mg)', frequencyPerDay: 3 },
             { name: 'Opicapone 50mg', frequencyPerDay: 3 }
         ]
-        expect(calculateRotigotine(exampleMedicines)).toBe(8);
+        expect(calculateRotigotine(exampleMedicines)).toBe(10);
     })
 
     test('works if recommended patchdose is below min patchdose and rounding is required', () => {

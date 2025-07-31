@@ -1,5 +1,6 @@
 'use client'
 
+import React, { Suspense } from 'react';
 import { redirect, useSearchParams } from 'next/navigation'
 import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
 import Back from "../components/back/Back"
@@ -11,8 +12,7 @@ import TextBox from '../components/text-box/TextBox';
 import styles from './results-page.module.scss'
 import { calculateTotalLed, mainTransform } from '../calculator/calculator-functions'
 
-
-export default function Results() {
+const MainPage = () => {
     const searchParams = useSearchParams()
     const medicines = searchParams.getAll('medicine');
     const frequencies = searchParams.getAll('frequency');
@@ -70,8 +70,8 @@ export default function Results() {
                     delivery of the above to their pre-existing timings.
                 </li>
                 <li className={styles.text + ' p'}>
-                    If a patient usually takes their PD medications more frequently than four times a day, then divide
-                    the total daily dose of madopar to align with their pre-existing frequency.
+                    <strong>If a patient usually takes their PD medications more frequently than four times a day, then divide
+                    the total daily dose of madopar to align with their pre-existing frequency.</strong>
                 </li>
                 <li className={styles.text + ' p'}>
                     Please follow local trust protocols regarding insertion and management of naso-gastric tubes.
@@ -87,3 +87,13 @@ export default function Results() {
         </main>
     )
 }
+
+const Results = () => {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <MainPage />
+      </Suspense>
+    );
+}
+
+export default Results;

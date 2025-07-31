@@ -29,7 +29,7 @@ describe('tests for the main transform function', () => {
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: 2
+            option2: 4
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);
@@ -119,7 +119,7 @@ describe('tests for the main transform function', () => {
             ],
             "1600": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "2000": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 0, led: 100 },
@@ -215,20 +215,20 @@ describe('tests for the main transform function', () => {
 
         const expectedMadopar = {
             "0800": [
-                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 3, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
+                { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2, led: 100 },
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
             ],
             "1200": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "1600": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
             "2000": [
                 { name: 'Madopar Dispersible 125mg (25/100mg)', quantity: 2, led: 100 },
-                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 1, led: 50 }
+                { name: 'Madopar Dispersible 62.5mg (12.5/50mg)', quantity: 0, led: 50 }
             ],
         };
 
@@ -304,7 +304,7 @@ describe('tests for the main transform function', () => {
 
         const expectedResult = {
             option1: expectedMadopar,
-            option2: 2
+            option2: 4
         };
 
         expect(mainTransform(exampleMedicines)).toEqual(expectedResult);

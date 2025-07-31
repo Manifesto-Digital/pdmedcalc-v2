@@ -5,7 +5,7 @@ export default function GlobalFooter() {
     return (
         <footer className={styles.footer}>
             <p className={styles.footerText}>
-                If you have any queries, or identify any problems, please <Link href='mailto:pdmedcalc@gmail.com' className={styles.link}>contact us</Link>
+                If you have any queries, or identify any problems, please <Link href='mailto:james.fisher@nhct.nhs.uk' className={styles.link}>contact us</Link>
             </p>
         </footer>
     )

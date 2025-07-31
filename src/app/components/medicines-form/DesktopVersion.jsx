@@ -104,13 +104,13 @@ export function DesktopVersion() {
                 </div>
 
                 <div className={styles.addAndRemoveButtonsContainer}>
-                    <p className='sr-only' id={`add-btn-desktop-description-${thisMedInput.id}`}>Include this medicine in the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <p className='sr-only' id={`add-btn-desktop-description-${thisMedInput.id}`}>Include this medicine in the conversion to a &apos;Levodopa equivalent dose&apos; of dispersible madopar.</p>
                     <button type='click' id={`add-btn-desktop-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`add-btn-desktop-description-${thisMedInput.id}`}>Add</button>
 
                     <p className='sr-only' id={`clear-btn-desktop-description-${thisMedInput.id}`}>Reset this medicine.</p>
                     <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`clear-btn-desktop-description-${thisMedInput.id}`}>Clear</button>
 
-                    <p className='sr-only' id={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove this medicine from the conversion to a 'Levodopa equivalent dose' of dispersible madopar.</p>
+                    <p className='sr-only' id={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove this medicine from the conversion to a &apos;Levodopa equivalent dose&apos; of dispersible madopar.</p>
                     <button type='click' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')} aria-describedby={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove</button>
                 </div>
 
