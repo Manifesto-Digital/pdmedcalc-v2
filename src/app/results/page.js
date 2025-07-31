@@ -70,8 +70,8 @@ const MainPage = () => {
                     delivery of the above to their pre-existing timings.
                 </li>
                 <li className={styles.text + ' p'}>
-                    If a patient usually takes their PD medications more frequently than four times a day, then divide
-                    the total daily dose of madopar to align with their pre-existing frequency.
+                    <strong>If a patient usually takes their PD medications more frequently than four times a day, then divide
+                    the total daily dose of madopar to align with their pre-existing frequency.</strong>
                 </li>
                 <li className={styles.text + ' p'}>
                     Please follow local trust protocols regarding insertion and management of naso-gastric tubes.
