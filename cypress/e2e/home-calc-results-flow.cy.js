@@ -20,7 +20,7 @@ describe('Tests for the main purpose of the app i.e. conversion of medicines ent
     cy.get('#eightPmBigMadoparDose').should('have.text', '1');
     cy.get('#eightPmSmallMadoparDose').should('not.exist');
 
-    cy.get('#option2Quantity').should('have.text', '2');
+    cy.get('#option2Quantity').should('have.text', '4');
   })
 
   it('Produces correct output when user enters just one medicine that is a dopamine agonist', () => {
@@ -76,7 +76,7 @@ describe('Tests for the main purpose of the app i.e. conversion of medicines ent
     cy.get('#twelvePmBigMadoparDose').should('not.exist');
     cy.get('#twelvePmSmallMadoparDose').should('have.text', '1');
     cy.get('#fourPmBigMadoparDose').should('not.exist');
-    cy.get('#fourPmSmallMadoparDose').should('have.text', '1');
+    cy.get('#fourPmSmallMadoparDose').should('not.exist');
     cy.get('#eightPmBigMadoparDose').should('not.exist');
     cy.get('#eightPmSmallMadoparDose').should('not.exist');
 
@@ -140,14 +140,14 @@ describe('Tests for the main purpose of the app i.e. conversion of medicines ent
     cy.get("#add-btn-3").click();
     cy.contains('button', 'Calculate').click();
 
-    cy.get('#eightAmBigMadoparDose').should('have.text', '3');
-    cy.get('#eightAmSmallMadoparDose').should('not.exist');
+    cy.get('#eightAmBigMadoparDose').should('have.text', '2');
+    cy.get('#eightAmSmallMadoparDose').should('have.text', '1');
     cy.get('#twelvePmBigMadoparDose').should('have.text', '2');
-    cy.get('#twelvePmSmallMadoparDose').should('have.text', '1');
+    cy.get('#twelvePmSmallMadoparDose').should('not.exist');
     cy.get('#fourPmBigMadoparDose').should('have.text', '2');
-    cy.get('#fourPmSmallMadoparDose').should('have.text', '1');
+    cy.get('#fourPmSmallMadoparDose').should('not.exist');
     cy.get('#eightPmBigMadoparDose').should('have.text', '2');
-    cy.get('#eightPmSmallMadoparDose').should('have.text', '1');
+    cy.get('#eightPmSmallMadoparDose').should('not.exist');
 
     cy.get('#option2Quantity').should('have.text', '16');
   })
