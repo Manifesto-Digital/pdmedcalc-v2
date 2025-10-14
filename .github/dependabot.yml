@@ -1,0 +1,33 @@
+# GitHub Dependabot configuration for automatic dependency updates
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    # Allow both direct and indirect updates
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+    # Only create PRs for security updates and minor/patch versions
+    open-pull-requests-limit: 10
+    # Auto-merge security updates if tests pass
+    commit-message:
+      prefix: "security"
+      include: "scope"
+    # Group updates to reduce PR noise
+    groups:
+      security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "security-update"
+      minor-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
