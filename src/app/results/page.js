@@ -82,7 +82,7 @@ const MainPage = () => {
                     Subcutaneous apomorphine should not be commenced without specialist input from the PD team.
                 </li>
                 <li className={styles.text + ' p'}>
-                    Please refrain from printing out the results page of the calculator. The webpage is not designed to be printed (when the printer scale is set to 'actual size', information relating to medicines and dosing may appear incomplete).
+                    Please refrain from printing out the results page of the calculator. The webpage is not designed to be printed (when the printer scale is set to &lsquo;actual size&rsquo;, information relating to medicines and dosing may appear incomplete).
                 </li>
             </ul>
             <ReferencesAccordion />
