@@ -14,7 +14,7 @@ export default function ReferencesAccordion() {
     };
 
     return (
-        <details className={styles.container}>
+        <details className={styles.container + ' references-accordion'}>
 
             <summary className={styles.heading + ' p'} onClick={toggleDetails}>
                 <Image
