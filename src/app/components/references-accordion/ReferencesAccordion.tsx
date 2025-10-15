@@ -1,21 +1,20 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './references-accordion.module.scss'
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './references-accordion.module.scss';
 
 export default function ReferencesAccordion() {
     const toggleDetails = () => {
         const plusSign = document.querySelector('#plus-sign');
         const minusSign = document.querySelector('#minus-sign');
 
-        minusSign.classList.toggle('hide');
-        plusSign.classList.toggle('hide');
+        minusSign?.classList.toggle('hide');
+        plusSign?.classList.toggle('hide');
     };
 
     return (
         <details className={styles.container + ' references-accordion'}>
-
             <summary className={styles.heading + ' p'} onClick={toggleDetails}>
                 <Image
                     src="/plus.svg"
@@ -48,7 +47,7 @@ export default function ReferencesAccordion() {
                     </cite>
                 </li>
                 <li className={styles.text + ' p'}>
-                    Jost ST et al. Levodopa Dose Equivalency in Parkinson’s Disease: Updated
+                    Jost ST et al. Levodopa Dose Equivalency in Parkinson&apos;s Disease: Updated
                     Systematic Review and Proposals.
                     <cite className={styles.citation}>
                         <Link href='https://movementdisorders.onlinelibrary.wiley.com/doi/10.1002/mds.29410'> Mov Disord 2023; 38(7):1236-1252.</Link>
@@ -56,5 +55,5 @@ export default function ReferencesAccordion() {
                 </li>
             </ul>
         </details>
-    )
+    );
 }

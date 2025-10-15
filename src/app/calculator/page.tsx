@@ -1,11 +1,13 @@
-import styles from './calculator-page.module.scss'
-import Back from "../components/back/Back"
+import type { Metadata } from 'next';
+import styles from './calculator-page.module.scss';
+import Back from "../components/back/Back";
 import BackToTop from '../components/back-to-top/BackToTop';
-import MedicinesForm from '../components/medicines-form/MedicinesForm'
+import MedicinesForm from '../components/medicines-form/MedicinesForm';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Calculator',
-}
+};
+
 export default function Calculator() {
     return (
         <main id="main-content" data-page="calculator">
@@ -17,5 +19,5 @@ export default function Calculator() {
                 <BackToTop />
             </div>
         </main>
-    )
+    );
 }

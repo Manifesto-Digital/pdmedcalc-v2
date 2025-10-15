@@ -1,5 +1,11 @@
-import styles from './entered-medicines.module.scss'
-export function EnteredMedicinesDesktopVersion({ medicineObjects }) {
+import { MedicineInput } from '../../calculator/calculator-functions';
+import styles from './entered-medicines.module.scss';
+
+interface EnteredMedicinesDesktopVersionProps {
+    medicineObjects: MedicineInput[];
+}
+
+export function EnteredMedicinesDesktopVersion({ medicineObjects }: EnteredMedicinesDesktopVersionProps) {
     return (
         <div className={styles.desktopOnly}>
             <div className={styles.headingsContainer}>
@@ -13,5 +19,5 @@ export function EnteredMedicinesDesktopVersion({ medicineObjects }) {
                 </div>
             )}
         </div>
-    )
+    );
 }

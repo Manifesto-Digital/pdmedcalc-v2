@@ -1,4 +1,14 @@
-export const medications = {
+export interface Medication {
+  led?: number;
+  isDa: boolean;
+  isComt: boolean;
+  hasLevodopa: boolean;
+  totalLedAdjustment?: number;
+}
+
+export type MedicationName = string;
+
+export const medications: Record<MedicationName, Medication> = {
     'Madopar (Co-beneldopa) 62.5mg (12.5/50mg)': { led: 50, isDa: false, isComt: false, hasLevodopa: true },
     'Madopar (Co-beneldopa) 125mg (25/100mg)': { led: 100, isDa: false, isComt: false, hasLevodopa: true },
     'Madopar (Co-beneldopa) 250mg (50/200mg)': { led: 200, isDa: false, isComt: false, hasLevodopa: true },
@@ -62,4 +72,4 @@ export const medications = {
     'Selegiline 10mg': { led: 100, isDa: false, isComt: false, hasLevodopa: false },
     'Safinamide 50mg': { led: 150, isDa: false, isComt: false, hasLevodopa: false },
     'Safinamide 100mg': { led: 150, isDa: false, isComt: false, hasLevodopa: false },
-}
+};

@@ -1,6 +1,11 @@
-import styles from './options.module.scss'
-export default function Option1({ option1 }) {
-    //console.log("option 1 is: ", option1);
+import { MadoparDistribution } from '../../calculator/calculator-functions';
+import styles from './options.module.scss';
+
+interface Option1Props {
+    option1: MadoparDistribution;
+}
+
+export default function Option1({ option1 }: Option1Props) {
     const eightAmBigMadoparDose = option1['0800'][0].quantity;
     const eightAmSmallMadoparDose = option1['0800'][1].quantity;
     const twelvePmBigMadoparDose = option1['1200'][0].quantity;
@@ -33,5 +38,5 @@ export default function Option1({ option1 }) {
                 {eightPmSmallMadoparDose ? <p className={styles.text}><span id="eightPmSmallMadoparDose">{eightPmSmallMadoparDose}</span> x Madopar Dispersible 62.5mg (50mg/12.5mg)</p> : ''}
             </div>
         </div>
-    )
+    );
 }

@@ -1,29 +1,32 @@
-'use client'
+'use client';
 
 import React, { Suspense } from 'react';
-import { redirect, useSearchParams } from 'next/navigation'
-import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion"
-import Back from "../components/back/Back"
+import { redirect, useSearchParams } from 'next/navigation';
+import ReferencesAccordion from "../components/references-accordion/ReferencesAccordion";
+import Back from "../components/back/Back";
 import BackToTop from '../components/back-to-top/BackToTop';
-import EnteredMedicines from '../components/entered-medicines/EnteredMedicines'
-import Option1 from '../components/options/Option1'
-import Option2 from '../components/options/Option2'
+import EnteredMedicines from '../components/entered-medicines/EnteredMedicines';
+import Option1 from '../components/options/Option1';
+import Option2 from '../components/options/Option2';
 import TextBox from '../components/text-box/TextBox';
-import styles from './results-page.module.scss'
-import { calculateTotalLed, mainTransform } from '../calculator/calculator-functions'
+import styles from './results-page.module.scss';
+import { calculateTotalLed, mainTransform, MedicineInput } from '../calculator/calculator-functions';
 
 const MainPage = () => {
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     const medicines = searchParams.getAll('medicine');
     const frequencies = searchParams.getAll('frequency');
 
     if (!(medicines.length > 1 && frequencies.length > 1)) { redirect('/'); }
 
-    const medicineObjects = [];
+    const medicineObjects: MedicineInput[] = [];
     for (let i = 0; i < medicines.length - 1; i++) {
-        medicineObjects.push({ name: medicines[i], frequencyPerDay: frequencies[i] });
+        medicineObjects.push({ 
+            name: medicines[i] as any, // Cast needed for medication names from URL
+            frequencyPerDay: Number(frequencies[i]) 
+        });
     }
-    //console.log("med objects ", medicineObjects);
+
     const calculationResult = mainTransform(medicineObjects);
 
     return (
@@ -36,7 +39,7 @@ const MainPage = () => {
                 the total levodopa equivalent dose for this patient is <span className='h6'>{calculateTotalLed(medicineObjects)} mg per day.</span>
             </p>
             {calculateTotalLed(medicineObjects) > 3000 ?
-                <p className={styles.text + ' p ' + styles.warning}>This is a very large levodopa equivalent dose. Please recheck the patient’s medications.
+                <p className={styles.text + ' p ' + styles.warning}>This is a very large levodopa equivalent dose. Please recheck the patient&apos;s medications.
                     Please then go back to the medication entry page and re-enter their medications.
                 </p> : ''
             }
@@ -88,8 +91,8 @@ const MainPage = () => {
             <ReferencesAccordion />
             <BackToTop />
         </main>
-    )
-}
+    );
+};
 
 const Results = () => {
     return (
@@ -97,6 +100,6 @@ const Results = () => {
         <MainPage />
       </Suspense>
     );
-}
+};
 
 export default Results;
