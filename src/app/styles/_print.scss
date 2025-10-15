@@ -1,0 +1,77 @@
+// Print-specific styles
+@media print {
+  // Hide global header
+  header {
+    display: none !important;
+  }
+
+  // Hide global footer
+  footer {
+    display: none !important;
+  }
+
+  // Hide references accordion
+  .references-accordion {
+    display: none !important;
+  }
+
+  // Hide back buttons
+  .back,
+  [class*="back-"] {
+    display: none !important;
+  }
+
+  // Hide back to top button
+  .back-to-top {
+    display: none !important;
+  }
+
+  // Optimize page breaks
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  ul, ol {
+    page-break-inside: avoid;
+  }
+
+  // Remove background colors for better printing
+  * {
+    background: white !important;
+    color: black !important;
+  }
+
+  // Ensure links are visible
+  a {
+    text-decoration: underline;
+  }
+
+  // Show link URLs after links (optional)
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666 !important;
+  }
+
+  // Don't show URLs for internal navigation links
+  a[href^="#"]:after,
+  a[href^="/"]:after {
+    content: "";
+  }
+
+  // Adjust margins for print
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  // Ensure content fits on page
+  main {
+    max-width: 100%;
+    padding: 0;
+  }
+}
