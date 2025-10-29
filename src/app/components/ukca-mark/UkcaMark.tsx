@@ -1,8 +1,7 @@
-import Image from 'next/image'
-import styles from './ukca-mark.module.scss'
+import Image from 'next/image';
+import styles from './ukca-mark.module.scss';
 
 export default function UkcaMark() {
-
     return (
         <Image
             src="/ukca-mark.png"
@@ -11,5 +10,5 @@ export default function UkcaMark() {
             height={50}
             className={styles.image}
         />
-    )
+    );
 }

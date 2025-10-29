@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import styles from './global-header.module.scss'
+import Image from 'next/image';
+import styles from './global-header.module.scss';
 
 export default function GlobalHeader() {
     return (
@@ -13,5 +13,5 @@ export default function GlobalHeader() {
                 className={styles.trustLogo}
             />
         </header>
-    )
+    );
 }

@@ -1,5 +1,11 @@
-import styles from './entered-medicines.module.scss'
-export function EnteredMedicinesMobileVersion({ medicineObjects }) {
+import { MedicineInput } from '../../calculator/calculator-functions';
+import styles from './entered-medicines.module.scss';
+
+interface EnteredMedicinesMobileVersionProps {
+    medicineObjects: MedicineInput[];
+}
+
+export function EnteredMedicinesMobileVersion({ medicineObjects }: EnteredMedicinesMobileVersionProps) {
     return (
         <div className={styles.mobileOnly}>
             {medicineObjects.map((aMedObj, index) =>
@@ -11,5 +17,5 @@ export function EnteredMedicinesMobileVersion({ medicineObjects }) {
                 </div>
             )}
         </div>
-    )
+    );
 }

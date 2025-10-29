@@ -1,22 +1,39 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { medications } from '@/app/data/data'
-import styles from './medicines-form.module.scss'
+import { useState } from 'react';
+import { medications } from '@/app/data/data';
+import styles from './medicines-form.module.scss';
+
+interface MedInputValues {
+    medicine: string;
+    frequency: string;
+    added?: boolean;
+}
+
+interface MedInput {
+    id: number;
+    values: MedInputValues;
+    added: boolean;
+}
+
+interface OneMedInputProps {
+    thisMedInput: MedInput;
+    allMedInputs: MedInput[];
+    setMedInputs: React.Dispatch<React.SetStateAction<MedInput[]>>;
+}
 
 export function DesktopVersion() {
-
-    function OneMedInput({ thisMedInput, allMedInputs, setMedInputs }) {
+    function OneMedInput({ thisMedInput, allMedInputs, setMedInputs }: OneMedInputProps) {
         const medicines = Object.keys(medications);
         const frequencies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        const add = (e) => {
+        const add = (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
 
-            const selectedMedicine = document.querySelector(`#med-input-desktop-${thisMedInput.id}`);
-            const selectedFrequency = document.querySelector(`#freq-for-med-input-desktop-${thisMedInput.id}`);
-            const medicineErrorMessage = document.querySelector(`#error-message-for-med-input-${thisMedInput.id}`);
-            const frequencyErrorMessage = document.querySelector(`#freq-error-message-for-med-input-${thisMedInput.id}`);
+            const selectedMedicine = document.querySelector(`#med-input-desktop-${thisMedInput.id}`) as HTMLSelectElement;
+            const selectedFrequency = document.querySelector(`#freq-for-med-input-desktop-${thisMedInput.id}`) as HTMLSelectElement;
+            const medicineErrorMessage = document.querySelector(`#error-message-for-med-input-${thisMedInput.id}`) as HTMLElement;
+            const frequencyErrorMessage = document.querySelector(`#freq-error-message-for-med-input-${thisMedInput.id}`) as HTMLElement;
 
             //to prevent unfilled values; should only proceed if both medicine and frequency are filled out
             if (!selectedMedicine.value) {
@@ -33,15 +50,15 @@ export function DesktopVersion() {
                 const newMedInputs = [...allMedInputs];
                 const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
                 newMedInputs[index].added = true;
-                newMedInputs.push({ id: thisMedInput.id + 1, values: { medicine: '', frequency: '', added: false } })
+                newMedInputs.push({ id: thisMedInput.id + 1, values: { medicine: '', frequency: '', added: false }, added: false });
                 setMedInputs(newMedInputs);
             }
-        }
+        };
 
-        const handleMedChange = (e) => {
+        const handleMedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             if (e.target.value != '') {
                 e.target.classList.remove(styles.errorBox);
-                e.target.previousElementSibling.classList.add('hide');
+                e.target.previousElementSibling?.classList.add('hide');
             }
             const newMedInputs = [...allMedInputs];
             const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
@@ -49,10 +66,10 @@ export function DesktopVersion() {
             setMedInputs(newMedInputs);
         };
 
-        const handleFreqChange = (e) => {
+        const handleFreqChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             if (e.target.value != '') {
                 e.target.classList.remove(styles.errorBox);
-                e.target.previousElementSibling.classList.add('hide');
+                e.target.previousElementSibling?.classList.add('hide');
             }
             const newMedInputs = [...allMedInputs];
             const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
@@ -60,16 +77,16 @@ export function DesktopVersion() {
             setMedInputs(newMedInputs);
         };
 
-        const reset = (e) => {
+        const reset = (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
 
             const newMedInputs = [...allMedInputs];
             const index = newMedInputs.findIndex((medInput) => medInput.id === thisMedInput.id);
             newMedInputs[index].values = { medicine: '', frequency: '', added: false };
             setMedInputs(newMedInputs);
-        }
+        };
 
-        const removeRow = (e) => {
+        const removeRow = (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             const copy = [...allMedInputs];
             const index = copy.findIndex((medInput) => medInput.id === thisMedInput.id);
@@ -77,48 +94,43 @@ export function DesktopVersion() {
             const allSubsequentMedInputs = copy.slice(index + 1);
             const newMedInputs = [...allPreviousMedInputs, ...allSubsequentMedInputs];
             setMedInputs(newMedInputs);
-        }
-
+        };
 
         return (
             <div className={styles.selectsAndButtonsContainer}>
                 <div className={styles.selectAndErrorContainer}>
                     <p id={`error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select dose</p>
-                    <label for={`med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the medicine that the patient is on.</label>
-                    <select id={`med-input-desktop-${thisMedInput.id}`} name="medicine" onChange={handleMedChange} className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
+                    <label htmlFor={`med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the medicine that the patient is on.</label>
+                    <select id={`med-input-desktop-${thisMedInput.id}`} name="medicine" value={thisMedInput.values.medicine} onChange={handleMedChange} className={(thisMedInput.values.medicine ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
-                        {thisMedInput.values.medicine && <option selected value={thisMedInput.values.medicine}>{thisMedInput.values.medicine}</option>}
-                        {medicines.filter(med => med !== thisMedInput.values.medicine).map((med, index) => <option key={index} value={med}>{med}</option>)}
+                        {medicines.map((med, index) => <option key={index} value={med}>{med}</option>)}
                     </select>
-
                 </div>
 
                 <div className={styles.selectAndErrorContainer}>
                     <p id={`freq-error-message-for-med-input-${thisMedInput.id}`} className={'h6' + ' ' + styles.errorMessage + ' ' + 'hide'}>Select number per 24 hours</p>
-                    <label for={`freq-for-med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the number of times per day that the patient takes this medicine.</label>
-                    <select id={`freq-for-med-input-desktop-${thisMedInput.id}`} name="frequency" onChange={handleFreqChange} className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
+                    <label htmlFor={`freq-for-med-input-desktop-${thisMedInput.id}`} className='sr-only'>Select the number of times per day that the patient takes this medicine.</label>
+                    <select id={`freq-for-med-input-desktop-${thisMedInput.id}`} name="frequency" value={thisMedInput.values.frequency} onChange={handleFreqChange} className={(thisMedInput.values.frequency ? styles.selected : '') + ' p ' + styles.select}>
                         <option value="">Select</option>
-                        {thisMedInput.values.frequency && <option selected value={thisMedInput.values.frequency}>{thisMedInput.values.frequency}</option>}
-                        {frequencies.filter(freq => freq != thisMedInput.values.frequency).map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
+                        {frequencies.map((freq, index) => <option key={index} value={freq}>{freq}</option>)}
                     </select>
                 </div>
 
                 <div className={styles.addAndRemoveButtonsContainer}>
                     <p className='sr-only' id={`add-btn-desktop-description-${thisMedInput.id}`}>Include this medicine in the conversion to a &apos;Levodopa equivalent dose&apos; of dispersible madopar.</p>
-                    <button type='click' id={`add-btn-desktop-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`add-btn-desktop-description-${thisMedInput.id}`}>Add</button>
+                    <button type='button' id={`add-btn-desktop-${thisMedInput.id}`} onClick={add} className={styles.add + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`add-btn-desktop-description-${thisMedInput.id}`}>Add</button>
 
                     <p className='sr-only' id={`clear-btn-desktop-description-${thisMedInput.id}`}>Reset this medicine.</p>
-                    <button type='click' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`clear-btn-desktop-description-${thisMedInput.id}`}>Clear</button>
+                    <button type='button' onClick={reset} className={styles.clear + ' p ' + (thisMedInput.added ? 'hide' : '')} aria-describedby={`clear-btn-desktop-description-${thisMedInput.id}`}>Clear</button>
 
                     <p className='sr-only' id={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove this medicine from the conversion to a &apos;Levodopa equivalent dose&apos; of dispersible madopar.</p>
-                    <button type='click' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')} aria-describedby={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove</button>
+                    <button type='button' onClick={removeRow} className={styles.remove + ' p ' + (thisMedInput.added ? '' : 'hide')} aria-describedby={`remove-btn-desktop-description-${thisMedInput.id}`}>Remove</button>
                 </div>
-
             </div>
-        )
+        );
     }
 
-    const [medInputs, setMedInputs] = useState([{ id: 1, values: { medicine: '', frequency: '' }, added: false }]);
+    const [medInputs, setMedInputs] = useState<MedInput[]>([{ id: 1, values: { medicine: '', frequency: '' }, added: false }]);
 
     return (
         <div className={styles.desktopOnly}>
@@ -134,7 +146,7 @@ export function DesktopVersion() {
 
                 <p className='sr-only' id='calculate-btn-desktop-description'>Calculate the total levodopa equivalent dose of the added medicines and convert them to dispersible madopar and rotigotine patch.</p>
                 <button type='submit' className={styles.button} aria-describedby='calculate-btn-desktop-description'>Calculate</button>
-            </form >
+            </form>
         </div>
-    )
+    );
 }

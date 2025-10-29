@@ -1,8 +1,12 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './back.module.scss'
+import Link from 'next/link';
+import styles from './back.module.scss';
 
-export default function Back({ href, text }) {
+interface BackProps {
+    href: string;
+    text: string;
+}
+
+export default function Back({ href, text }: BackProps) {
     return (
         <Link className={styles.container + ' back'} href={href}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,5 +14,5 @@ export default function Back({ href, text }) {
             </svg>
             {text}
         </Link>
-    )
+    );
 }

@@ -1,12 +1,13 @@
+import type { Metadata } from 'next';
 import styles from './home-page.module.scss';
 import Explainer from '../components/explainer/Explainer';
 import TextBox from '../components/text-box/TextBox';
 import UkcaMark from '../components/ukca-mark/UkcaMark';
 import BackToTop from '../components/back-to-top/BackToTop';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Home',
-}
+};
 
 export default function Home() {
   return (
@@ -16,5 +17,5 @@ export default function Home() {
       <UkcaMark />
       <BackToTop />
     </main>
-  )
+  );
 }

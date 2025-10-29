@@ -1,5 +1,5 @@
-import { MobileVersion } from './MobileVersion'
-import { DesktopVersion } from './DesktopVersion'
+import { MobileVersion } from './MobileVersion';
+import { DesktopVersion } from './DesktopVersion';
 
 export default function MedicinesForm() {
     return (
@@ -7,5 +7,5 @@ export default function MedicinesForm() {
             <MobileVersion />
             <DesktopVersion />
         </>
-    )
+    );
 }
