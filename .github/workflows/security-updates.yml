@@ -43,7 +43,7 @@ jobs:
     - name: Check for security vulnerabilities
       id: audit
       run: |
-        npm audit --audit-level=high --format=json > audit-results.json || true
+        npm audit --audit-level=high --json > audit-results.json || true
         VULN_COUNT=$(cat audit-results.json | jq '.metadata.vulnerabilities.total // 0')
         echo "vulnerability_count=$VULN_COUNT" >> $GITHUB_OUTPUT
         
