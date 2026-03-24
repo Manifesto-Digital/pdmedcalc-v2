@@ -1,6 +1,6 @@
 describe('Tests for the main purpose of the app i.e. conversion of medicines entered on the calculator page', () => {
   beforeEach(() => {
-    cy.visit('https://pdmedcalc-v2.pages.dev/');
+    cy.visit('/');
     cy.contains('Accept & continue').click();
   })
 

@@ -1,13 +1,18 @@
 name: Cypress e2e Tests
 on: [push]
 jobs:
- cypress-tests:
+  cypress-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npm run build
-    - run: npm run cypress:run
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+      - name: Start local server
+        run: npx serve@latest out -p 3000 &
+      - name: Wait for server to be ready
+        run: timeout 30 bash -c 'until curl -sf http://localhost:3000 > /dev/null; do sleep 1; done'
+      - run: npm run cypress:run
