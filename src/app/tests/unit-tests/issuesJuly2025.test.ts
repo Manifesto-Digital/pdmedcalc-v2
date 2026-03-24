@@ -24,7 +24,7 @@ describe('Client reported issues with rotigotine calculations', () => {
     test('Patient 20 - Complex case should give 10mg patch (was giving 8mg)', () => {
         const patient20Medicines = [
             { name: 'Sinemet (Co-careldopa) 125mg (25/100mg)', frequencyPerDay: 8 },
-            { name: 'Sinemet (Co-careldopa) 250mg (25/250mg)', frequencyPerDay: 1 },
+            { name: 'Sinemet (Co-careldopa) 275mg (25/250mg)', frequencyPerDay: 1 },
             { name: 'Ropinirole (Requip XL) 2mg', frequencyPerDay: 1 }
         ];
         

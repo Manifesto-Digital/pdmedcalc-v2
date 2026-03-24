@@ -16,7 +16,7 @@ export const medications: Record<MedicationName, Medication> = {
     'Sinemet (Co-careldopa) 62.5mg (12.5/50mg)': { led: 50, isDa: false, isComt: false, hasLevodopa: true },
     'Sinemet (Co-careldopa) 110mg (10/100mg)': { led: 100, isDa: false, isComt: false, hasLevodopa: true },
     'Sinemet (Co-careldopa) 125mg (25/100mg)': { led: 100, isDa: false, isComt: false, hasLevodopa: true },
-    'Sinemet (Co-careldopa) 250mg (25/250mg)': { led: 250, isDa: false, isComt: false, hasLevodopa: true },
+    'Sinemet (Co-careldopa) 275mg (25/250mg)': { led: 250, isDa: false, isComt: false, hasLevodopa: true },
     'Half Sinemet (Co-careldopa) CR 25/100mg': { led: 75, isDa: false, isComt: false, hasLevodopa: true },
     'Sinemet (Co-careldopa) CR 50/200mg': { led: 150, isDa: false, isComt: false, hasLevodopa: true },
     'Madopar (Co-beneldopa) dispersible 62.5mg (12.5/50mg)': { led: 50, isDa: false, isComt: false, hasLevodopa: true },
