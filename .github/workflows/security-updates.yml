@@ -203,6 +203,50 @@ jobs:
         PR_NUMBER=$(gh pr view "$SECURITY_BRANCH" --json number --jq .number)
         echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
         
+    - name: Create Pull Request for develop
+      if: steps.audit.outputs.found_vulnerabilities == 'true'
+      id: create_pr_develop
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TESTS_STATUS="✅ All tests passing"
+
+        if [ "${{ steps.jest_tests.outputs.exit_code }}" != "0" ] || [ "${{ steps.cypress_tests.outputs.exit_code }}" != "0" ]; then
+          if [ "${{ steps.retest.outputs.jest_retest_exit }}" == "0" ] && [ "${{ steps.retest.outputs.cypress_retest_exit }}" == "0" ]; then
+            TESTS_STATUS="✅ Tests fixed automatically"
+          else
+            TESTS_STATUS="⚠️ Tests need manual review"
+          fi
+        fi
+
+        DEV_PR_URL=$(gh pr create \
+          --title "🔒 Security Updates (develop) - $(date +%Y-%m-%d)" \
+          --body "## Automated Security Updates
+
+        This PR contains security updates for vulnerable dependencies, synced to the develop branch.
+
+        ### Summary
+        - **Vulnerabilities resolved**: ${{ steps.audit.outputs.vulnerability_count }}
+        - **Test status**: $TESTS_STATUS
+        - **Branch**: $SECURITY_BRANCH
+
+        ### Changes
+        - Updated package.json and package-lock.json with security fixes
+        - Applied \`npm audit fix\` and \`npm audit fix --force\`
+
+        ### Testing
+        - ✅ Unit tests (Jest)
+        - ✅ E2E tests (Cypress)
+
+        This PR will be automatically merged if all tests pass.
+        " \
+          --base develop \
+          --head "$SECURITY_BRANCH" \
+          --label "security,automated" 2>/dev/null || echo "")
+
+        DEV_PR_NUMBER=$(echo "$DEV_PR_URL" | grep -oE '[0-9]+$' || echo "")
+        echo "pr_number=$DEV_PR_NUMBER" >> $GITHUB_OUTPUT
+
     - name: Auto-merge if tests pass
       if: steps.create_pr.outputs.pr_number && steps.jest_tests.outputs.exit_code == '0' && steps.cypress_tests.outputs.exit_code == '0'
       env:
@@ -210,6 +254,14 @@ jobs:
       run: |
         echo "All tests passed - auto-merging security updates"
         gh pr merge ${{ steps.create_pr.outputs.pr_number }} --squash --auto
+
+    - name: Auto-merge develop PR if tests pass
+      if: steps.create_pr_develop.outputs.pr_number && steps.jest_tests.outputs.exit_code == '0' && steps.cypress_tests.outputs.exit_code == '0'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "All tests passed - auto-merging security updates to develop"
+        gh pr merge ${{ steps.create_pr_develop.outputs.pr_number }} --squash --auto
 
     - name: Send success notification
       if: steps.create_pr.outputs.pr_number && steps.jest_tests.outputs.exit_code == '0' && steps.cypress_tests.outputs.exit_code == '0'
