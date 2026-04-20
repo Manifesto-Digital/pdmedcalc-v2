@@ -34,7 +34,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '22'
+        node-version: '24'
         cache: 'npm'
 
     - name: Install dependencies
@@ -66,12 +66,17 @@ jobs:
         npm test > jest-output.txt 2>&1
         echo "exit_code=$?" >> $GITHUB_OUTPUT
 
+    - name: Build app
+      run: npm run build
+
     - name: Install Cypress dependencies
       run: npx cypress install
 
     - name: Run Cypress tests
       id: cypress_tests
       run: |
+        npx serve@latest out -p 3000 &
+        timeout 30 bash -c 'until curl -sf http://localhost:3000 > /dev/null; do sleep 1; done'
         npx cypress run > cypress-output.txt 2>&1
         echo "exit_code=$?" >> $GITHUB_OUTPUT
 
