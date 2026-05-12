@@ -47,7 +47,7 @@ jobs:
       id: audit
       run: |
         npm audit --audit-level=high --json > audit-results.json || true
-        VULN_COUNT=$(cat audit-results.json | jq '.metadata.vulnerabilities.total // 0')
+        VULN_COUNT=$(cat audit-results.json | jq '(.metadata.vulnerabilities.high // 0) + (.metadata.vulnerabilities.critical // 0)')
         echo "vulnerability_count=$VULN_COUNT" >> $GITHUB_OUTPUT
         
         if [ "$VULN_COUNT" -gt 0 ]; then
@@ -60,8 +60,7 @@ jobs:
       if: steps.audit.outputs.found_vulnerabilities == 'true'
       run: |
         echo "Applying security fixes..."
-        npm audit fix
-        npm audit fix --force || true
+        npm audit fix || true
 
     - name: Run unit tests
       id: jest_tests
