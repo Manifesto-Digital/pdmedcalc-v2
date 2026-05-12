@@ -60,7 +60,7 @@ jobs:
       if: steps.audit.outputs.found_vulnerabilities == 'true'
       run: |
         echo "Applying security fixes..."
-        npm audit fix
+        npm audit fix || true
         npm audit fix --force || true
 
     - name: Run unit tests
